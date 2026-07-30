@@ -1,11 +1,17 @@
 import { useMidnight } from './hooks/useMidnight';
 import { WalletConnect } from './components/WalletConnect';
-import { CircuitCall } from './components/CircuitCall';
-import { Shield, Lock, EyeOff, Layers, Github } from 'lucide-react';
+import { WorkflowBar } from './components/WorkflowBar';
+import { DualStateDashboard } from './components/DualStateDashboard';
+import { ZKPipeline } from './components/ZKPipeline';
+import { PrivacyBreakdown } from './components/PrivacyBreakdown';
+import { Shield, Lock, Github } from 'lucide-react';
 
 export function App() {
   const {
     wallet,
+    privateWitnessValue,
+    setPrivateWitnessValue,
+    publicCounterState,
     circuitCall,
     connectWallet,
     disconnectWallet,
@@ -27,14 +33,14 @@ export function App() {
       <header className="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-indigo-600/20 border border-indigo-500/30 rounded-xl text-indigo-400">
+            <div className="p-2.5 bg-indigo-600/20 border border-indigo-500/30 rounded-xl text-indigo-400 shadow-lg shadow-indigo-600/10">
               <Shield className="w-6 h-6" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
                 Vansidian
                 <span className="text-xs font-mono px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 rounded-md font-normal">
-                  Preprod
+                  Preprod Testnet
                 </span>
               </h1>
               <p className="text-xs text-slate-400">Enterprise Zero-Knowledge State & Audit Engine</p>
@@ -45,85 +51,69 @@ export function App() {
             href="https://github.com/brad-git03/Midnight-RiseIn"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl transition-colors"
+            className="flex items-center gap-2 text-xs font-medium text-slate-300 hover:text-white px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl transition-all hover:border-slate-700"
           >
             <Github className="w-4 h-4" />
-            GitHub Repo
+            <span>GitHub Repository</span>
           </a>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-6 py-10 space-y-8 relative z-10">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-8 space-y-6 relative z-10">
         {/* Hero Section */}
-        <section className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-medium text-indigo-300 mb-2">
+        <section className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-medium text-indigo-300 mb-1">
             <Lock className="w-3.5 h-3.5 text-indigo-400" />
-            Midnight Builder Challenge — Level 2
+            Midnight Network • Zero-Knowledge Dual-State DApp
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Confidential DApp Interface
+            Confidential State & Proof Engine
           </h2>
-          <p className="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Execute zero-knowledge circuit transitions locally in your browser. All private witness inputs remain strictly on your device and are never exposed to the public network.
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Execute zero-knowledge circuit transitions locally in your browser. All private witness parameters remain strictly on your device and are never exposed to the public network.
           </p>
         </section>
 
-        {/* Core Interactive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Step 3: Wallet Connection Component */}
-          <WalletConnect
-            wallet={wallet}
-            onConnect={connectWallet}
-            onDisconnect={disconnectWallet}
-            isWalletInstalled={isWalletInstalled}
-          />
+        {/* 1. Guided 3-Step Workflow Banner */}
+        <WorkflowBar
+          isConnected={wallet.isConnected}
+          hasWitnessValue={Boolean(privateWitnessValue)}
+          isConfirmed={circuitCall.stage === 'confirmed'}
+        />
 
-          {/* Step 4: Circuit Execution Component */}
-          <CircuitCall
-            circuitState={circuitCall}
-            onExecute={executeCircuitCall}
-            isConnected={wallet.isConnected}
-          />
-        </div>
+        {/* 2. Wallet Connection Card */}
+        <WalletConnect
+          wallet={wallet}
+          onConnect={connectWallet}
+          onDisconnect={disconnectWallet}
+          isWalletInstalled={isWalletInstalled}
+        />
 
-        {/* Feature Grid Banner */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
-          <div className="p-4 glass-card rounded-xl border border-slate-800/80 space-y-2">
-            <div className="flex items-center gap-2 text-indigo-400 font-semibold text-sm">
-              <EyeOff className="w-4 h-4" />
-              Client-Side Witness
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Secret inputs execute strictly in local browser memory. Zero plaintext exposure to RPC nodes.
-            </p>
-          </div>
+        {/* 3. Real-Time ZK Execution Pipeline Banner */}
+        <ZKPipeline
+          stage={circuitCall.stage}
+          isCalling={circuitCall.isCalling}
+          txHash={circuitCall.txHash}
+        />
 
-          <div className="p-4 glass-card rounded-xl border border-slate-800/80 space-y-2">
-            <div className="flex items-center gap-2 text-purple-400 font-semibold text-sm">
-              <Lock className="w-4 h-4" />
-              Browser Proof Gen
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              ZK-SNARK proofs are calculated locally using the Compact compiler assets and proof client.
-            </p>
-          </div>
+        {/* 4. Dual-State Visual Dashboard (Private Witness Vault vs Public Ledger State) */}
+        <DualStateDashboard
+          privateWitnessValue={privateWitnessValue}
+          onWitnessChange={setPrivateWitnessValue}
+          publicCounterState={publicCounterState}
+          circuitState={circuitCall}
+          onExecute={executeCircuitCall}
+          isConnected={wallet.isConnected}
+        />
 
-          <div className="p-4 glass-card rounded-xl border border-slate-800/80 space-y-2">
-            <div className="flex items-center gap-2 text-emerald-400 font-semibold text-sm">
-              <Layers className="w-4 h-4" />
-              Selective Disclosure
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Public ledger state updates only through explicit `disclose()` bounds verified on Preprod.
-            </p>
-          </div>
-        </section>
+        {/* 5. Privacy Transparency Breakdown */}
+        <PrivacyBreakdown />
       </main>
 
       {/* Footer */}
       <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500 relative z-10">
-        <p>Vansidian • Built for Midnight Builder Challenge Level 2 • Network: Preprod</p>
+        <p>Vansidian • Built for Midnight Builder Challenge • Network: Preprod Testnet</p>
       </footer>
     </div>
   );
