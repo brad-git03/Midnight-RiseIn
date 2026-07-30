@@ -1,43 +1,53 @@
 # AegisVault Protocol
 
-> Enterprise Zero-Knowledge State & Confidential Audit Engine built on the Midnight Network using the Compact language.
+> Enterprise Zero-Knowledge State & Confidential Audit Engine built on the Midnight Network using Compact and React/Vite.
+
+## Live Demo
+
+[PASTE LIVE VERCEL URL AFTER DEPLOYING FRONTEND]
+
+*(Example: `https://aegis-vault-protocol.vercel.app`)*
 
 ## Contract Address
 
 | Network  | Address                          |
 |----------|----------------------------------|
-| Preview  | `mn_addr_preview1ahxfavzu58myd7mje72crey7nv2vc7hjd57e73zhpndaegwhvs4q2jm5ch` |
 | Preprod  | `mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm` |
+
+*(Contract address is MANDATORY and active on Midnight Preprod testnet.)*
 
 ## What This Does
 
-AegisVault Protocol implements an enterprise-grade privacy-preserving counter and audit log mechanism on the Midnight blockchain. It allows organizations to update an on-chain ledger state while processing sensitive witness calculations locally, ensuring client inputs remain strictly private while publicly recording verified state transitions.
+AegisVault Protocol provides an enterprise-grade privacy-preserving DApp interface. Users can connect their Lace Wallet, execute zero-knowledge circuit transitions directly in their web browser, and record verified state updates on the Midnight Preprod blockchain while keeping private witness parameters completely confidential.
 
 ## Privacy Model
 
 - **What is PUBLIC (on-chain, visible to anyone)**:
   - `counter`: The public ledger state storing state values on the Midnight blockchain.
-  - Executed circuit function signatures (`increment`) and disclosed calculated outputs.
+  - Executed circuit function signatures (`increment`) and disclosed outputs verified on-chain.
 
 - **What is PRIVATE (private witness, never on-chain)**:
-  - `secretIncrement`: Private witness function executing strictly within the client's local execution context.
-  - Raw witness keys and secret inputs that are never broadcast across the network.
+  - `secretIncrement`: Private witness function executing strictly inside local browser memory.
+  - Raw secret witness values and client secret keys that are never broadcast across the network.
 
 - **What the user PROVES without revealing**:
-  - The user proves they hold a valid private witness input and executed a state update in accordance with Compact circuit rules, without revealing their underlying secret witness values.
+  - The user proves they hold a valid private witness input and executed a state transition according to Compact circuit rules, without revealing their underlying secret witness values to anyone.
+
+## Privacy Claim
+
+> **Privacy Claim Statement**: An on-chain observer analyzing the Midnight Preprod blockchain sees valid transaction hashes, zero-knowledge proofs, and updated public ledger state bounds (`counter`), but **cannot see or deduce** the private witness values (`secretIncrement`) or client secret parameters used to generate the transaction.
 
 ## Tech Stack
 
-- Midnight network, Compact language, Node.js v22, Docker, WSL2
+- Midnight network, Compact language, Midnight.js SDK, React/Vite, Lace wallet, Tailwind CSS, Docker, WSL2
 
 ## Prerequisites
 
+- **Lace Wallet Extension**: Installed in Chrome/Brave connected to Midnight Preprod network.
 - **Node.js**: v22 LTS (or compatible Node runtime)
-- **Docker Desktop**: Required for the local proof server container (`midnightntwrk/proof-server:8.1.0`)
-- **Compact Compiler**: Installed via official Midnight toolchain (`compact` v0.31.1 / CLI v0.5.1)
-- **WSL2 (Windows Subsystem for Linux)**: Required on Windows environments for running the Compact compiler toolchain
+- **Docker Desktop**: Required for local proof server (`midnightntwrk/proof-server:8.1.0`)
 
-## Setup
+## Run Locally
 
 1. **Clone the repository & install dependencies**:
    ```bash
@@ -46,37 +56,25 @@ AegisVault Protocol implements an enterprise-grade privacy-preserving counter an
    npm install
    ```
 
-2. **Start the Proof Server (Docker)**:
+2. **Start the Frontend Local Dev Server**:
    ```bash
-   docker pull midnightntwrk/proof-server:8.1.0
-   docker run -d -p 6300:6300 midnightntwrk/proof-server:8.1.0 midnight-proof-server -v
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
+
+3. **Run Unit Test Suite**:
+   ```bash
+   npm test
    ```
 
-3. **Compile the Compact Contract**:
+4. **Compile Compact Contract (WSL2)**:
    ```bash
    npm run compile
    ```
 
-4. **Deploy to Preview / Preprod Network**:
-   ```bash
-   $env:NODE_OPTIONS="--max-old-space-size=12288"; npm run deploy -- --network preprod
-   ```
+## Demo Video
 
-## Run Tests
-
-Execute the unit test suite covering circuit logic, state transitions, and witness privacy:
-
-```bash
-npm test
-```
-
-## Initial Idea
-
-### Project Concept: AegisVault Protocol — Enterprise Zero-Knowledge State & Audit Engine
-AegisVault Protocol explores zero-knowledge state updates on the Midnight Network. In traditional public blockchains, state transitions require full disclosure of underlying parameters. By combining Midnight's dual-state architecture with Compact smart contracts:
-- Sensitive client inputs remain client-side as **private witnesses**.
-- On-chain consensus only verifies zero-knowledge proofs and updates public ledger state (`counter`) via explicit `disclose()` bounds.
-- Future iterations will expand this architecture into confidential voting, anonymous rate-limiting, and privacy-preserving enterprise audit logs.
+[PLACEHOLDER — I will add the link after recording]
 
 ## Screenshots
 

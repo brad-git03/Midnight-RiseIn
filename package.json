@@ -6,8 +6,10 @@
   "author": "brad-git03",
   "license": "MIT",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "compile": "wsl -d Ubuntu /root/.local/bin/compact compile /mnt/c/Users/kazen/Downloads/Midnight-Risein/contracts/counter.compact /mnt/c/Users/kazen/Downloads/Midnight-Risein/managed/counter",
-    "build": "npx tsc --noEmit || true",
     "deploy": "npx tsx src/deploy.ts",
     "test": "npx tsx tests/counter.test.ts",
     "network": "npx tsx src/network.ts",
@@ -15,6 +17,7 @@
   },
   "dependencies": {
     "@midnight-ntwrk/compact-runtime": "0.16.0",
+    "@midnight-ntwrk/dapp-connector-api": "4.0.1",
     "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
     "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.1.1",
     "@midnight-ntwrk/midnight-js-indexer-public-data-provider": "4.1.1",
@@ -25,14 +28,25 @@
     "@midnight-ntwrk/midnight-js-types": "4.1.1",
     "@midnight-ntwrk/midnight-js-utils": "4.1.1",
     "@midnight-ntwrk/wallet-sdk": "1.2.0",
+    "lucide-react": "^0.474.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rxjs": "^7.8.2",
     "ws": "^8.21.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.0.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
     "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.23.1",
-    "typescript": "^6.0.3"
+    "typescript": "^5.7.3",
+    "vite": "^5.4.14"
   },
   "engines": {
     "node": ">=22.0.0"
