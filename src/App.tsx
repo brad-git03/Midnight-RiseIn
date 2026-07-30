@@ -32,7 +32,7 @@ export function App() {
             </div>
             <div>
               <h1 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-                Vansidian Protocol
+                Vansidian
                 <span className="text-xs font-mono px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 rounded-md font-normal">
                   Preprod
                 </span>
@@ -123,7 +123,7 @@ export function App() {
 
       {/* Footer */}
       <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500 relative z-10">
-        <p>Vansidian Protocol • Built for Midnight Builder Challenge Level 2 • Network: Preprod</p>
+        <p>Vansidian • Built for Midnight Builder Challenge Level 2 • Network: Preprod</p>
       </footer>
     </div>
   );

@@ -1,4 +1,4 @@
-# Vansidian Protocol
+# Vansidian
 
 > Enterprise Zero-Knowledge State & Confidential Audit Engine built on the Midnight Network using Compact and React/Vite.
 
@@ -6,7 +6,7 @@
 
 [PASTE LIVE VERCEL URL AFTER DEPLOYING FRONTEND]
 
-*(Example: `https://vansidian-protocol.vercel.app`)*
+*(Example: `https://vansidian.vercel.app`)*
 
 ## Contract Address
 
@@ -18,7 +18,7 @@
 
 ## What This Does
 
-Vansidian Protocol provides an enterprise-grade privacy-preserving DApp interface. Users can connect their Lace Wallet, execute zero-knowledge circuit transitions directly in their web browser, and record verified state updates on the Midnight Preprod blockchain while keeping private witness parameters completely confidential.
+Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users can connect their Lace Wallet, execute zero-knowledge circuit transitions directly in their web browser, and record verified state updates on the Midnight Preprod blockchain while keeping private witness parameters completely confidential.
 
 ## Privacy Model
 
@@ -78,8 +78,8 @@ Vansidian Protocol provides an enterprise-grade privacy-preserving DApp interfac
 
 ## Initial Idea
 
-### Project Concept: Vansidian Protocol — Enterprise Zero-Knowledge State & Audit Engine
-Vansidian Protocol explores zero-knowledge state updates on the Midnight Network. In traditional public blockchains, state transitions require full disclosure of underlying parameters. By combining Midnight's dual-state architecture with Compact smart contracts:
+### Project Concept: Vansidian — Enterprise Zero-Knowledge State & Audit Engine
+Vansidian explores zero-knowledge state updates on the Midnight Network. In traditional public blockchains, state transitions require full disclosure of underlying parameters. By combining Midnight's dual-state architecture with Compact smart contracts:
 - Sensitive client inputs remain client-side as **private witnesses**.
 - On-chain consensus only verifies zero-knowledge proofs and updates public ledger state (`counter`) via explicit `disclose()` bounds.
 - Future iterations will expand this architecture into confidential voting, anonymous rate-limiting, and privacy-preserving enterprise audit logs.
