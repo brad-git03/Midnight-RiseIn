@@ -1,16 +1,17 @@
 {
-  "name": "midnight-counter",
+  "name": "aegis-vault-protocol",
   "version": "1.0.0",
   "type": "module",
-  "description": "Midnight Network Privacy Counter application for Level 1 Builder Challenge",
-  "author": "",
+  "description": "Enterprise Zero-Knowledge State & Confidential Audit Engine on Midnight Network",
+  "author": "brad-git03",
   "license": "MIT",
   "scripts": {
-    "compile": "compact compile contracts/counter.compact contracts/managed/counter",
+    "compile": "wsl -d Ubuntu /root/.local/bin/compact compile /mnt/c/Users/kazen/Downloads/Midnight-Risein/contracts/counter.compact /mnt/c/Users/kazen/Downloads/Midnight-Risein/managed/counter",
     "build": "npx tsc --noEmit || true",
     "deploy": "npx tsx src/deploy.ts",
     "test": "npx tsx tests/counter.test.ts",
-    "network": "npx tsx src/network.ts"
+    "network": "npx tsx src/network.ts",
+    "get-address": "npx tsx src/get-address.ts"
   },
   "dependencies": {
     "@midnight-ntwrk/compact-runtime": "0.16.0",
