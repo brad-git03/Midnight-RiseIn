@@ -1,1 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="obsidian-grad" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="vdn-stroke" x1="50" y1="50" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  <path d="M100 24 L164 42 C164 42 164 96 138 132 C120 156 100 176 100 176 C100 176 80 156 62 132 C36 96 36 42 36 42 L100 24 Z" fill="#090d16" stroke="url(#obsidian-grad)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M68 66 L95 125" stroke="url(#vdn-stroke)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M95 125 L122 66" stroke="url(#vdn-stroke)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M122 55 L122 125" stroke="url(#vdn-stroke)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M122 92 C132 82 144 82 150 94 L150 125" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="100" cy="148" r="7" fill="#10b981"/>
+</svg>
