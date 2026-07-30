@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export interface WalletState {
   isConnected: boolean;
@@ -38,31 +38,57 @@ export function useMidnight() {
     error: null,
   });
 
-  // Check if Lace wallet is installed
-  const checkWalletInstalled = useCallback((): boolean => {
-    return typeof window !== 'undefined' && Boolean((window as any).midnight?.mnLace || (window as any).midnight?.lace);
+  // Find Lace connector under all known Midnight / Cardano window injection properties
+  const getLaceConnector = useCallback(() => {
+    if (typeof window === 'undefined') return null;
+    const win = window as any;
+    
+    // Check all common provider keys injected by Lace Wallet for Midnight
+    const connector = 
+      win.midnight?.mnLace || 
+      win.midnight?.lace || 
+      win.midnight?.['midnight-lace'] ||
+      (win.midnight ? Object.values(win.midnight)[0] : null) ||
+      win.cardano?.lace;
+
+    return connector || null;
   }, []);
+
+  const checkWalletInstalled = useCallback((): boolean => {
+    return Boolean(getLaceConnector());
+  }, [getLaceConnector]);
 
   // Connect to Lace Wallet
   const connectWallet = useCallback(async () => {
     setWallet((prev) => ({ ...prev, isConnecting: true, error: null }));
     try {
-      if (!checkWalletInstalled()) {
-        throw new Error('Lace Wallet extension is not installed. Please install Lace Wallet for Midnight Network.');
-      }
-
-      const midnightGlobal = (window as any).midnight;
-      const connector = midnightGlobal?.mnLace || midnightGlobal?.lace;
+      const connector = getLaceConnector();
       
       if (!connector) {
-        throw new Error('Lace connector unavailable.');
+        throw new Error(
+          'Lace Wallet extension not detected in browser tab. Please refresh the page (F5) or ensure Lace Wallet extension permissions are enabled for this domain.',
+        );
       }
 
-      const api = await connector.enable();
-      const state = await api.state();
-      
-      const unshieldedAddress = state?.unshieldedAddress || state?.address || 'mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm';
-      const currentNetwork = state?.network || 'preprod';
+      let api: any = null;
+      if (typeof connector.enable === 'function') {
+        api = await connector.enable();
+      } else {
+        api = connector;
+      }
+
+      let unshieldedAddress = 'mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm';
+      let currentNetwork = 'preprod';
+
+      if (api && typeof api.state === 'function') {
+        const state = await api.state();
+        if (state?.unshieldedAddress) unshieldedAddress = state.unshieldedAddress;
+        if (state?.address) unshieldedAddress = state.address;
+        if (state?.network) currentNetwork = state.network;
+      } else if (api && typeof api.getAccountAddress === 'function') {
+        const addr = await api.getAccountAddress();
+        if (addr) unshieldedAddress = addr;
+      }
 
       setWallet({
         isConnected: true,
@@ -74,8 +100,8 @@ export function useMidnight() {
     } catch (err: any) {
       console.error('Wallet connection error:', err);
       let errorMsg = err?.message || 'Failed to connect Lace wallet.';
-      if (errorMsg.includes('rejected') || errorMsg.includes('User denied')) {
-        errorMsg = 'Connection request rejected by user.';
+      if (errorMsg.includes('rejected') || errorMsg.includes('User denied') || errorMsg.includes('Refused')) {
+        errorMsg = 'Connection request rejected by user in Lace Wallet.';
       }
       setWallet((prev) => ({
         ...prev,
@@ -84,7 +110,7 @@ export function useMidnight() {
         error: errorMsg,
       }));
     }
-  }, [checkWalletInstalled]);
+  }, [getLaceConnector]);
 
   // Disconnect Wallet
   const disconnectWallet = useCallback(() => {
@@ -124,7 +150,7 @@ export function useMidnight() {
     try {
       // Step 1: Local ZK Proof Generation in browser
       console.log('Generating Zero-Knowledge Proof locally in browser...');
-      await new Promise((r) => setTimeout(r, 2500)); // Simulate proof generation time
+      await new Promise((r) => setTimeout(r, 2500)); // Proof generation simulation
 
       setCircuitCall((prev) => ({
         ...prev,
@@ -134,7 +160,7 @@ export function useMidnight() {
 
       // Step 2: On-chain transaction submission
       console.log('Submitting transaction on Preprod network...');
-      await new Promise((r) => setTimeout(r, 2000)); // Simulate chain submission
+      await new Promise((r) => setTimeout(r, 2000)); // Chain submission simulation
 
       const mockTxHash = '0x' + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
 
