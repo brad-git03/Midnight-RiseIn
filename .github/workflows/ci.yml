@@ -2,20 +2,29 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v22
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: Install dependencies
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
         run: npm install
-      - name: Run tests
+
+      - name: Run Unit Test Suite
         run: npm test
+
+      - name: Build DApp Frontend
+        run: npm run build

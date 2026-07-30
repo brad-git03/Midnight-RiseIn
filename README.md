@@ -1,5 +1,7 @@
 # Vansidian
 
+[![CI](https://github.com/brad-git03/Midnight-RiseIn/actions/workflows/ci.yml/badge.svg)](https://github.com/brad-git03/Midnight-RiseIn/actions/workflows/ci.yml)
+
 > Enterprise Zero-Knowledge State & Confidential Audit Engine built on the Midnight Network using Compact and React/Vite.
 
 ## Live Demo
@@ -20,15 +22,15 @@ Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users 
 
 ## Privacy Model
 
-- **What is PUBLIC (on-chain, visible to anyone)**:
-  - `counter`: The public ledger state storing state values on the Midnight blockchain.
+- **PUBLIC**:
+  - `counter`: The public ledger state storing verified state values on the Midnight blockchain.
   - Executed circuit function signatures (`increment`) and disclosed outputs verified on-chain.
 
-- **What is PRIVATE (private witness, never on-chain)**:
+- **PRIVATE**:
   - `secretIncrement`: Private witness function executing strictly inside local browser memory.
   - Raw secret witness values and client secret keys that are never broadcast across the network.
 
-- **What the user PROVES without revealing**:
+- **PROVED without revealing**:
   - The user proves they hold a valid private witness input and executed a state transition according to Compact circuit rules, without revealing their underlying secret witness values to anyone.
 
 ## Privacy Claim
@@ -37,7 +39,7 @@ Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users 
 
 ## Tech Stack
 
-- Midnight network, Compact language, Midnight.js SDK, React/Vite, Lace wallet, Tailwind CSS, Docker, WSL2
+- Midnight Network, Compact language, Midnight.js SDK, React/Vite, Lace Wallet, Tailwind CSS, Docker, WSL2, GitHub Actions CI/CD
 
 ## Prerequisites
 
@@ -45,7 +47,7 @@ Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users 
 - **Node.js**: v22 LTS (or compatible Node runtime)
 - **Docker Desktop**: Required for local proof server (`midnightntwrk/proof-server:8.1.0`)
 
-## Run Locally
+## Setup & Run Locally
 
 1. **Clone the repository & install dependencies**:
    ```bash
@@ -60,23 +62,32 @@ Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users 
    ```
    Open `http://localhost:5173` in your browser.
 
-3. **Run Unit Test Suite**:
-   ```bash
-   npm test
-   ```
-
-4. **Compile Compact Contract (WSL2)**:
+3. **Compile Compact Smart Contract (WSL2)**:
    ```bash
    npm run compile
    ```
 
-## Initial Idea
+## Run Tests
 
-### Project Concept: Vansidian — Enterprise Zero-Knowledge State & Audit Engine
-Vansidian explores zero-knowledge state updates on the Midnight Network. In traditional public blockchains, state transitions require full disclosure of underlying parameters. By combining Midnight's dual-state architecture with Compact smart contracts:
-- Sensitive client inputs remain client-side as **private witnesses**.
-- On-chain consensus only verifies zero-knowledge proofs and updates public ledger state (`counter`) via explicit `disclose()` bounds.
-- Future iterations will expand this architecture into confidential voting, anonymous rate-limiting, and privacy-preserving enterprise audit logs.
+Execute the unit test suite verifying Circuit Logic, State Transitions, and Witness Privacy:
+
+```bash
+npm test
+```
+
+## CI/CD
+
+Vansidian features an automated GitHub Actions CI/CD pipeline (`.github/workflows/ci.yml`). On every `push` to `main` and `pull_request`, the workflow automatically:
+1. Provisions a Node.js v22 environment.
+2. Installs project dependencies via `npm install`.
+3. Runs the unit test suite (`npm test`) covering circuit logic, ledger state transitions, and witness privacy.
+4. Validates production frontend compilation (`npm run build`).
+
+## Product Proposal
+
+For product vision, user demographics, Midnight privacy necessity, data modeling, and Mainnet feasibility roadmap, see [PROPOSAL.md](PROPOSAL.md).
+
+---
 
 ## Screenshots
 
