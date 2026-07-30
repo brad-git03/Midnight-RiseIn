@@ -4,9 +4,7 @@
 
 ## Live Demo
 
-[PASTE LIVE VERCEL URL AFTER DEPLOYING FRONTEND]
-
-*(Example: `https://vansidian.vercel.app`)*
+🔗 **Live Application URL**: [https://vansidian-protocol.vercel.app](https://vansidian-protocol.vercel.app)
 
 ## Contract Address
 
@@ -71,10 +69,6 @@ Vansidian provides an enterprise-grade privacy-preserving DApp interface. Users 
    ```bash
    npm run compile
    ```
-
-## Demo Video
-
-[PLACEHOLDER — I will add the link after recording]
 
 ## Initial Idea
 
