@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Unit Test Suite
+      - name: Run Vansidian Unit Test Suite
         run: npm test
 
       - name: Build DApp Frontend

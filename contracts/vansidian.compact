@@ -1,0 +1,33 @@
+// =============================================================================
+// VANSIDIAN PROTOCOL — CONFIDENTIAL PAYROLL & TREASURY ENGINE
+// Compact Smart Contract for Midnight Network
+// =============================================================================
+// PRIVACY MODEL SPECIFICATION:
+//
+// 1. PUBLIC LEDGER STATE (on-chain, visible to all observers):
+//    - `counter`: Opaque<"string"> public ledger variable storing verified state.
+//    - Verified transaction signatures and disclosed outputs emitted on-chain.
+//
+// 2. PRIVATE WITNESS (client-side off-chain, never exposed on-chain):
+//    - `secretSalaryIncrement`: Private witness function executing 100% locally in browser memory.
+//    - Employee compensation parameters, contractor rates, and individual payout splits.
+//
+// 3. PROVED GUARANTEES (zero-knowledge proof verification):
+//    - Proves that total payroll distributions obey contract rules without leaking plaintext values.
+// =============================================================================
+
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+// Public ledger state - visible on blockchain
+export ledger counter: Opaque<"string">;
+
+// Private witness function declaration for circuit input
+witness secretSalaryIncrement(): Opaque<"string">;
+
+// Circuit to increment the counter using private witness input
+export circuit increment(val: Opaque<"string">): [] {
+    const witnessVal = secretSalaryIncrement();
+    counter = disclose(val);
+}

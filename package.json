@@ -9,9 +9,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "compile": "wsl -d Ubuntu /root/.local/bin/compact compile /mnt/c/Users/kazen/Downloads/Midnight-Risein/contracts/counter.compact /mnt/c/Users/kazen/Downloads/Midnight-Risein/managed/counter",
+    "compile": "wsl -d Ubuntu /root/.local/bin/compact compile /mnt/c/Users/kazen/Downloads/Midnight-Risein/contracts/vansidian.compact /mnt/c/Users/kazen/Downloads/Midnight-Risein/managed/vansidian",
     "deploy": "npx tsx src/deploy.ts",
-    "test": "npx tsx tests/counter.test.ts",
+    "test": "npx tsx tests/vansidian.test.ts",
     "network": "npx tsx src/network.ts",
     "get-address": "npx tsx src/get-address.ts"
   },
