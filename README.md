@@ -97,7 +97,7 @@ For product vision, user demographics, Midnight privacy necessity, data modeling
 
 ## Product X Profile
 
-[PLACEHOLDER — I will add after creating the account]
+🐦 **Product X (Twitter) Profile**: [https://x.com/vansidian](https://x.com/vansidian)
 
 ---
 
