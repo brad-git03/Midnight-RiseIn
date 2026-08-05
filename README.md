@@ -41,6 +41,13 @@ Vansidian solves this by utilizing Midnight's dual-state architecture. Sensitive
 
 > **Privacy Claim Statement**: An on-chain observer analyzing the Midnight Preprod blockchain sees valid transaction hashes, zero-knowledge proofs, and updated public ledger state bounds (`counter`), but **cannot see or deduce** the private witness values (`secretSalaryIncrement`) or client secret parameters used to generate the transaction.
 
+## Level 5 — User Validation
+
+- **Target**: 50 Preprod testnet users
+- **Current Count**: **50 / 50 Verified Preprod Users**
+- **User Directory**: See [USERS.md](USERS.md) for the verified Preprod wallet address directory.
+- **Feedback & Iterations Log**: See [docs/FEEDBACK.md](docs/FEEDBACK.md) for feedback collection, themes, and implemented product changes.
+
 ## Tech Stack
 
 - Midnight Network, Compact language v0.31.1, Midnight.js SDK, React/Vite, Lace Wallet, Tailwind CSS, Docker, WSL2, GitHub Actions CI/CD
