@@ -31,3 +31,4 @@ User feedback was collected across three primary channels during the Level 5 tes
 | **Added Quick Increment Presets** | Allows testers to test ZK circuit executions in 1 click (+1, +5, +10, +25). | `a53bf54` |
 | **Added Privacy Transparency Card** | Displays side-by-side breakdown of what stays 100% private locally vs what on-chain observers see. | `a53bf54` |
 | **Added Vdn Obsidian Shield Logo & Enterprise Theme** | Upgraded DApp branding to an institutional-grade ZK SaaS portal. | `7f8b438` |
+| **Updated Contract Address Format** | Added Hex Contract ID (`0200...`) and Bech32 Contract Address (`mn_contract_preprod...`) for validator compliance. | `9f221c5` |
