@@ -10,9 +10,11 @@
 
 ## Contract Address
 
-| Network  | Address                              |
-|----------|--------------------------------------|
-| Preprod  | `mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm` |
+| Network  | Contract Address (Hex ID) | Bech32 Contract Address |
+|----------|---------------------------|-------------------------|
+| Preprod  | `02008f1a4e927c3d2b1f0e9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c` | `mn_contract_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm` |
+
+*Deployer Wallet Address (Preprod)*: `mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm`
 
 *(Contract address is MANDATORY and active on Midnight Preprod testnet.)*
 

@@ -19,7 +19,10 @@ export interface CircuitCallState {
   history: Array<{ txHash: string; timestamp: string; addedValue: number }>;
 }
 
-export const PREPROD_CONTRACT_ADDRESS = 'mn_addr_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm';
+// Preprod contract address (Hex ID and Bech32 representation)
+export const PREPROD_CONTRACT_HEX_ID = '02008f1a4e927c3d2b1f0e9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c';
+export const PREPROD_CONTRACT_BECH32 = 'mn_contract_preprod14g0smfdj6hjjkcd5hjh43xkra9q78zgfluqh7zzz6gy42y24f3jsc8chvm';
+export const PREPROD_CONTRACT_ADDRESS = PREPROD_CONTRACT_BECH32;
 
 export function useMidnight() {
   const [wallet, setWallet] = useState<WalletState>({
