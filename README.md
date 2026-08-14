@@ -4,9 +4,11 @@
 
 > Enterprise Zero-Knowledge State & Confidential Audit Engine built on the Midnight Network using Compact and React/Vite.
 
-## Live Demo
+## Live Demo & Social Links
 
-🔗 **Live Application URL**: [https://vansidian-protocol.vercel.app](https://vansidian-protocol.vercel.app)
+- 🔗 **Live Application URL**: [https://vansidian-protocol.vercel.app](https://vansidian-protocol.vercel.app)
+- 🐦 **Official X (Twitter) Platform**: [https://x.com/vansidian](https://x.com/vansidian)
+- 📂 **GitHub Repository**: [https://github.com/brad-git03/Midnight-RiseIn](https://github.com/brad-git03/Midnight-RiseIn)
 
 ## Contract Address
 
@@ -48,7 +50,8 @@ Vansidian solves this by utilizing Midnight's dual-state architecture. Sensitive
 - **Target**: 50 Preprod testnet users
 - **Current Count**: **50 / 50 Verified Preprod Users**
 - **User Directory File**: See [USERS.md](USERS.md) for full directory.
-- **Feedback & Iteration File**: See [docs/FEEDBACK.md](docs/FEEDBACK.md) for detailed feedback logs.
+- **Feedback & Iteration File**: See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for detailed feedback logs.
+- **Commit Log File**: See [COMMITS.md](COMMITS.md) or [docs/COMMITS.md](docs/COMMITS.md) for full incremental commit history.
 
 ### 👥 50 Verified Preprod User Wallet Addresses Directory
 
@@ -164,7 +167,7 @@ Vansidian features an automated GitHub Actions CI/CD pipeline (`.github/workflow
 
 ## Usage Guide
 
-For a non-technical step-by-step user guide, see [docs/USAGE.md](docs/USAGE.md).
+For a non-technical step-by-step user guide, see [USAGE.md](USAGE.md) or [docs/USAGE.md](docs/USAGE.md).
 
 ## Product Proposal
 
@@ -172,7 +175,7 @@ For product vision, user demographics, Midnight privacy necessity, data modeling
 
 ## Product X Profile
 
-🐦 **Product X (Twitter) Profile**: [https://x.com/vansidian](https://x.com/vansidian)
+🐦 **Official X (Twitter) Profile**: [https://x.com/vansidian](https://x.com/vansidian)
 
 ---
 
