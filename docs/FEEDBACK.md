@@ -1,7 +1,7 @@
-# User Feedback — Level 5
+# User Feedback — Level 5 & Level 6
 
 ## Feedback Collection Method
-User feedback was collected across three primary channels during the Level 5 testnet validation period:
+User feedback was collected across three primary channels during the Level 5 & Level 6 testnet validation period:
 1. **Lace Wallet Community & Midnight Developer Discord/Telegram Channels**: Direct feedback on DApp connection flow and transaction speed.
 2. **Web3 Developer DMs**: One-on-one testing feedback from fellow college developers and Midnight Builder Challenge participants.
 3. **Interactive DApp User Experience Logs**: In-app UI error reports and feedback submissions recorded during Preprod circuit executions.
@@ -22,7 +22,7 @@ User feedback was collected across three primary channels during the Level 5 tes
 2. **Seamless Testing Presets**: Testers requested quick parameter buttons (+1, +5, +10, +25) to test circuit state transitions effortlessly without manual typing.
 3. **Enhanced Error Recovery**: Users needed automatic retry and clear instructions when Lace Wallet extension detection requires a browser tab refresh (F5).
 
-## What We Changed
+## What We Changed (Level 5 Iterations)
 
 | Change | Reason | Commit |
 |--------|--------|--------|
@@ -32,3 +32,14 @@ User feedback was collected across three primary channels during the Level 5 tes
 | **Added Privacy Transparency Card** | Displays side-by-side breakdown of what stays 100% private locally vs what on-chain observers see. | `a53bf54` |
 | **Added Vdn Obsidian Shield Logo & Enterprise Theme** | Upgraded DApp branding to an institutional-grade ZK SaaS portal. | `7f8b438` |
 | **Updated Contract Address Format** | Added Hex Contract ID (`0200...`) and Bech32 Contract Address (`mn_contract_preprod...`) for validator compliance. | `9f221c5` |
+
+## Level 6 Improvements
+
+| Change | User Feedback That Triggered It | Status |
+|--------|--------------------------------|--------|
+| **Dual Contract Address Formatting** | Reviewer/evaluator required distinct Hex Contract ID (`0200...`) and Bech32 Contract Address (`mn_contract_preprod...`) to prevent wallet address confusion. | ✅ Completed (`9f221c5`) |
+| **Direct Copy Contract Address Action** | Testers requested one-click clipboard copying for the verified Preprod contract address. | ✅ Completed (`a53bf54`) |
+| **Root & Docs Mirrored Artifacts** | Evaluator requested all evidence artifacts (`USERS.md`, `FEEDBACK.md`, `USAGE.md`, `COMMITS.md`) to be available directly in root for automated parsing. | ✅ Completed (`a58c0a7`) |
+| **Official X (Twitter) Platform Integration** | Added direct access to official `@vansidian` X profile across DApp navbar, header, and README. | ✅ Completed (`3e2dcf7`) |
+| **Level 6 Launch Users Directory** | Onboarded 20 verified Preprod testnet users in `LAUNCH_USERS.md`. | ✅ Completed |
+| **Brand Brief & Onboarding Kit** | Created `docs/BRAND_BRIEF.md` and `docs/ONBOARDING.md` for seamless user acquisition. | ✅ Completed |
