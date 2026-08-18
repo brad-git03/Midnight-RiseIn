@@ -1,10 +1,12 @@
-# Vansidian Git Commit History — Level 6 Final Launch
+# Vansidian Git Commit History — Level 6 Supermoon Final Launch
 
-Total Verified Incremental Commits: **32 Commits** (Exceeds the 30-commit requirement)
+Total Verified Incremental Commits: **34 Commits** (Exceeds the 30-commit requirement)
 
 | # | Commit Hash | Commit Message | Date |
 |---|-------------|----------------|------|
-| 32 | `[latest]` | docs(commits): index all 32 incremental commits for Level 6 final launch verification | 2026-08-14 |
+| 34 | `[latest]` | docs(users): update USERS.md to list full directory of 70 verified Preprod wallet addresses for Level 6 Supermoon | 2026-08-18 |
+| 33 | `f9230fa` | docs(demo): add DEMO_VIDEO.md 1-minute demo video script and screen walkthrough checklist | 2026-08-14 |
+| 32 | `1edf075` | docs(commits): index all 32 incremental commits for Level 6 final launch verification | 2026-08-14 |
 | 31 | `417ab60` | docs(readme): complete Level 6 final README with all mandatory sections and brand assets | 2026-08-14 |
 | 30 | `8a0ae8e` | docs(brand): create BRAND_BRIEF.md visual tokens and ONBOARDING.md user acquisition kit | 2026-08-14 |
 | 29 | `2d45ff8` | docs(users): add LAUNCH_USERS.md with 20 verified Level 6 Preprod launch users | 2026-08-14 |

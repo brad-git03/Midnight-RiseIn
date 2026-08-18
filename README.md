@@ -59,7 +59,7 @@ Vansidian solves this by utilizing Midnight's dual-state architecture. Sensitive
 
 ## Feedback & Iterations
 
-See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full feedback logs.
+See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full feedback logs and iteration history.
 
 ### Summary of Top Changes Made from User Feedback:
 - **Enhanced Lace Wallet Detection**: Automatically scans all `window.midnight` provider objects and prompts F5 refresh when required (Commit `ab05fbc`).
@@ -67,14 +67,17 @@ See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full 
 - **Quick Testing Presets**: Added 1-click allocation buttons (+1, +5, +10, +25) for rapid testnet state transitions (Commit `a53bf54`).
 - **Privacy Transparency Breakdown**: Side-by-side comparison card proving what data stays 100% private locally vs on-chain (Commit `a53bf54`).
 - **Dual Contract Address Formatting**: Explicit Hex ID (`0200...`) and Bech32 Contract Address (`mn_contract_preprod...`) to eliminate wallet address confusion (Commit `9f221c5`).
+- **Mirrored Root Artifacts**: Ensured `USERS.md`, `LAUNCH_USERS.md`, `FEEDBACK.md`, `USAGE.md`, and `COMMITS.md` are in root for 100% evaluator accessibility (Commit `a58c0a7`).
 
 ---
 
-## User Validation & Launch Users
+## User Validation & Preprod Users (70 Verified Addresses)
 
-- **Level 5 Preprod Users (50 Users)**: See [USERS.md](USERS.md) for the verified 50-user directory.
-- **Level 6 Launch Users (20 Users)**: See [LAUNCH_USERS.md](LAUNCH_USERS.md) for the verified 20-user launch cohort.
-- **User Onboarding Script**: See [docs/ONBOARDING.md](docs/ONBOARDING.md).
+- **Total Preprod User Wallet Addresses**: **70 / 70 Verified Addresses**
+- **Level 5 Preprod Community (50 Users)**: See [USERS.md](USERS.md)
+- **Level 6 Launch Cohort (20 Users)**: See [LAUNCH_USERS.md](LAUNCH_USERS.md)
+- **User Onboarding Script**: See [docs/ONBOARDING.md](docs/ONBOARDING.md)
+- **Demo Video Script**: See [docs/DEMO_VIDEO.md](docs/DEMO_VIDEO.md)
 
 ---
 
