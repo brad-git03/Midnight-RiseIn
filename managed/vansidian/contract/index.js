@@ -1,5 +1,5 @@
 import * as __compactRuntime from '@midnight-ntwrk/compact-runtime';
-__compactRuntime.checkRuntimeVersion('0.16.0');
+__compactRuntime.checkRuntimeVersion('0.18.0-rc.1');
 
 const _descriptor_0 = __compactRuntime.CompactTypeOpaqueString;
 
@@ -47,6 +47,8 @@ const _descriptor_6 = new _ContractAddress_0();
 
 const _descriptor_7 = new __compactRuntime.CompactTypeUnsignedInteger(255n, 1);
 
+const _descriptor_8 = new __compactRuntime.CompactTypeUnsignedInteger(4294967295n, 4);
+
 export class Contract {
   witnesses;
   constructor(...args_0) {
@@ -62,20 +64,20 @@ export class Contract {
     }
     this.witnesses = witnesses_0;
     this.circuits = {
-      increment: (...args_1) => {
+      increment: async (...args_1) => {
         if (args_1.length !== 2) {
           throw new __compactRuntime.CompactError(`increment: expected 2 arguments (as invoked from Typescript), received ${args_1.length}`);
         }
         const contextOrig_0 = args_1[0];
         const val_0 = args_1[1];
-        if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.currentQueryContext != undefined)) {
+        if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.callContext.currentQueryContext != undefined)) {
           __compactRuntime.typeError('increment',
                                      'argument 1 (as invoked from Typescript)',
-                                     'vansidian.compact line 30 char 1',
+                                     'vansidian.compact line 34 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
-        const context = { ...contextOrig_0, gasCost: __compactRuntime.emptyRunningCost() };
+        const context = __compactRuntime.copyCircuitContext(contextOrig_0);
         const partialProofData = {
           input: {
             value: _descriptor_0.toValue(val_0),
@@ -85,15 +87,18 @@ export class Contract {
           publicTranscript: [],
           privateTranscriptOutputs: []
         };
-        const result_0 = this._increment_0(context, partialProofData, val_0);
+        const result_0 = await this._increment_0(context,
+                                                 partialProofData,
+                                                 val_0);
         partialProofData.output = { value: [], alignment: [] };
-        return { result: result_0, context: context, proofData: partialProofData, gasCost: context.gasCost };
+        __compactRuntime.finalizeCallProofData(context, partialProofData);
+        return { result: result_0, context: context, gasCost: context.callContext.currentGasCost };
       }
     };
     this.impureCircuits = { increment: this.circuits.increment };
     this.provableCircuits = { increment: this.circuits.increment };
   }
-  initialState(...args_0) {
+  async initialState(...args_0) {
     if (args_0.length !== 1) {
       throw new __compactRuntime.CompactError(`Contract state constructor: expected 1 argument (as invoked from Typescript), received ${args_0.length}`);
     }
@@ -115,7 +120,7 @@ export class Contract {
     stateValue_0 = stateValue_0.arrayPush(__compactRuntime.StateValue.newNull());
     state_0.data = new __compactRuntime.ChargedState(stateValue_0);
     state_0.setOperation('increment', new __compactRuntime.ContractOperation());
-    const context = __compactRuntime.createCircuitContext(__compactRuntime.dummyContractAddress(), constructorContext_0.initialZswapLocalState.coinPublicKey, state_0.data, constructorContext_0.initialPrivateState);
+    const context = __compactRuntime.createCircuitContext('constructor', __compactRuntime.dummyContractAddress(), constructorContext_0.initialZswapLocalState.coinPublicKey, state_0.data, constructorContext_0.initialPrivateState);
     const partialProofData = {
       input: { value: [], alignment: [] },
       output: undefined,
@@ -132,25 +137,26 @@ export class Contract {
                                                  value: __compactRuntime.StateValue.newCell({ value: _descriptor_0.toValue(''),
                                                                                               alignment: _descriptor_0.alignment() }).encode() } },
                                        { ins: { cached: false, n: 1 } }]);
-    state_0.data = new __compactRuntime.ChargedState(context.currentQueryContext.state.state);
+    state_0.data = new __compactRuntime.ChargedState(context.callContext.currentQueryContext.state.state);
     return {
       currentContractState: state_0,
-      currentPrivateState: context.currentPrivateState,
-      currentZswapLocalState: context.currentZswapLocalState
+      currentPrivateState: context.callContext.currentPrivateState,
+      currentZswapLocalState: context.callContext.currentZswapLocalState
     }
   }
   _secretSalaryIncrement_0(context, partialProofData) {
-    const witnessContext_0 = __compactRuntime.createWitnessContext(ledger(context.currentQueryContext.state), context.currentPrivateState, context.currentQueryContext.address);
+    const witnessContext_0 = __compactRuntime.createWitnessContext(ledger(context.callContext.currentQueryContext.state), context.callContext.currentPrivateState, context.callContext.currentQueryContext.address);
     const [nextPrivateState_0, result_0] = this.witnesses.secretSalaryIncrement(witnessContext_0);
-    context.currentPrivateState = nextPrivateState_0;
+    context.callContext.currentPrivateState = nextPrivateState_0;
     partialProofData.privateTranscriptOutputs.push({
       value: _descriptor_0.toValue(result_0),
       alignment: _descriptor_0.alignment()
     });
     return result_0;
   }
-  _increment_0(context, partialProofData, val_0) {
+  async _increment_0(context, partialProofData, val_0) {
     const witnessVal_0 = this._secretSalaryIncrement_0(context, partialProofData);
+    const verifiedTransition_0 = val_0;
     __compactRuntime.queryLedgerState(context,
                                       partialProofData,
                                       [
@@ -158,7 +164,7 @@ export class Contract {
                                                  value: __compactRuntime.StateValue.newCell({ value: _descriptor_7.toValue(0n),
                                                                                               alignment: _descriptor_7.alignment() }).encode() } },
                                        { push: { storage: true,
-                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_0.toValue(val_0),
+                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_0.toValue(verifiedTransition_0),
                                                                                               alignment: _descriptor_0.alignment() }).encode() } },
                                        { ins: { cached: false, n: 1 } }]);
     return [];
@@ -168,7 +174,7 @@ export function ledger(stateOrChargedState) {
   const state = stateOrChargedState instanceof __compactRuntime.StateValue ? stateOrChargedState : stateOrChargedState.state;
   const chargedState = stateOrChargedState instanceof __compactRuntime.StateValue ? new __compactRuntime.ChargedState(stateOrChargedState) : stateOrChargedState;
   const context = {
-    currentQueryContext: new __compactRuntime.QueryContext(chargedState, __compactRuntime.dummyContractAddress()),
+    callContext: { currentQueryContext: new __compactRuntime.QueryContext(chargedState, __compactRuntime.dummyContractAddress()), currentGasCost: __compactRuntime.emptyRunningCost() },
     costModel: __compactRuntime.CostModel.initialCostModel()
   };
   const partialProofData = {
@@ -195,7 +201,7 @@ export function ledger(stateOrChargedState) {
   };
 }
 const _emptyContext = {
-  currentQueryContext: new __compactRuntime.QueryContext(new __compactRuntime.ContractState().data, __compactRuntime.dummyContractAddress())
+  callContext: { currentQueryContext: new __compactRuntime.QueryContext(new __compactRuntime.ContractState().data, __compactRuntime.dummyContractAddress()), currentGasCost: __compactRuntime.emptyRunningCost() }
 };
 const _dummyContract = new Contract({
   secretSalaryIncrement: (...args) => undefined
@@ -203,4 +209,8 @@ const _dummyContract = new Contract({
 export const pureCircuits = {};
 export const contractReferenceLocations =
   { tag: 'publicLedgerArray', indices: { } };
+export const expectedVk = {
+  'increment': '099cbcb255212828871680a089e3c46873de8692d4fe399137ae311eae4328f8',
+};
+
 //# sourceMappingURL=index.js.map

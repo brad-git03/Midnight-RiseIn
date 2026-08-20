@@ -4,5 +4,5 @@
   "sourceRoot": "../../../contracts/",
   "sources": ["vansidian.compact"],
   "names": [],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAkBA;;;;;;;;;;;;;MAWA,AAAA,SAGC;;;;;cAHwB,KAAqB;;;;;;;;;;;yCAArB,KAAqB;;;;;;;sEAArB,KAAqB;;;OAG7C;;;;GACA;EAfD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAKA;;;;;;;;;yEAAwC;;;;;;;GAUvC;EAPD,AAAA,wBAAkD;;0DAAlD,qBAAkD;;;;;;;GAAA;EAGlD,AAAA,YAGC,4BAHwB,KAAqB;UACpC,YAAoC;IAC1C;;;;;;;2HAAmB,KAAG;;yEAAf;;GACV;;;;;;;;;;;;;;;;IATD;qCAAA;;;;;;;;;;;0GAAwC;KAAA;;;;;;;;;;;;"
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAsBA;;;;;;;;;;;;;MAWA,AAAA,SAUC;;;;;cAVwB,KAAqB;;;;;;;;;;;yCAArB,KAAqB;;;;;;;;;iDAArB,KAAqB;;;;OAU7C;;;;GACA;EAtBD;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAKA;;;;;;;;;yEAAwC;;;;;;;GAiBvC;EAdD,AAAA,wBAAkD;;0DAAlD,qBAAkD;;;;;;;GAAA;EAGlD,AAAA,kBAUC,4BAVwB,KAAqB;UAEpC,YAAoC;UAIpC,oBAAkC,GAAJ,KAAG;IAGvC;;;;;;;2HAAU,oBAAkB;;yEAArB;;GACV;;;;;;;;;;;;;;;;IAhBD;qCAAA;;;;;;;;;;;0GAAwC;KAAA;;;;;;;;;;;;;;;;"
 }

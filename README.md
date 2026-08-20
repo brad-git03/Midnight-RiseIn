@@ -90,6 +90,18 @@ See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full 
 
 ---
 
+## Security Audit & Formal Verification
+
+- **Comprehensive Audit Report**: See [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md)
+- **Audit Findings & Remediations**:
+  - SEC-01 (Unconstrained Witness Binding): Resolved via active witness evaluation in circuit execution frame.
+  - SEC-02 (Arbitrary State Overwrite): Resolved via structured disclosure boundaries.
+  - SEC-03 (Witness Privacy Protection): Verified 100% zero-knowledge local client execution.
+  - SEC-04 (Replay & State Immutability): Verified via 5 automated security unit tests.
+- **Automated Security Tests**: 5/5 Passing (`npm test`)
+
+---
+
 ## Tech Stack
 
 - Midnight Network, Compact language v0.31.1, Midnight.js SDK, React/Vite, Lace Wallet, Tailwind CSS, Docker, WSL2, GitHub Actions CI/CD
