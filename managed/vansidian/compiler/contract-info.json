@@ -11,8 +11,8 @@
         {
           "name": "val",
           "type": {
-            "type-name": "Opaque",
-            "tsType": "string"
+            "type-name": "Uint",
+            "maxval": 65535
           }
         }
       ],
@@ -25,12 +25,12 @@
   ],
   "witnesses": [
     {
-      "name": "secretSalaryIncrement",
+      "name": "secretSalaryAmount",
       "arguments": [
       ],
       "result type": {
-        "type-name": "Opaque",
-        "tsType": "string"
+        "type-name": "Uint",
+        "maxval": 65535
       }
     }
   ],
@@ -41,11 +41,7 @@
       "name": "counter",
       "index": 0,
       "exported": true,
-      "storage": "Cell",
-      "type": {
-        "type-name": "Opaque",
-        "tsType": "string"
-      }
+      "storage": "Counter"
     }
   ]
 }

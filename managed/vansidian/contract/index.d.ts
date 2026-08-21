@@ -1,26 +1,26 @@
 import type * as __compactRuntime from '@midnight-ntwrk/compact-runtime';
 
 export type Witnesses<PS> = {
-  secretSalaryIncrement(context: __compactRuntime.WitnessContext<Ledger, PS>): [PS, string];
+  secretSalaryAmount(context: __compactRuntime.WitnessContext<Ledger, PS>): [PS, bigint];
 }
 
 export type ImpureCircuits<PS> = {
-  increment(context: __compactRuntime.CircuitContext<PS>, val_0: string): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  increment(context: __compactRuntime.CircuitContext<PS>, val_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
 }
 
 export type ProvableCircuits<PS> = {
-  increment(context: __compactRuntime.CircuitContext<PS>, val_0: string): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  increment(context: __compactRuntime.CircuitContext<PS>, val_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
 }
 
 export type PureCircuits = {
 }
 
 export type Circuits<PS> = {
-  increment(context: __compactRuntime.CircuitContext<PS>, val_0: string): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  increment(context: __compactRuntime.CircuitContext<PS>, val_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
 }
 
 export type Ledger = {
-  readonly counter: string;
+  readonly counter: bigint;
 }
 
 export type ContractReferenceLocations = any;

@@ -1,7 +1,7 @@
 import * as __compactRuntime from '@midnight-ntwrk/compact-runtime';
 __compactRuntime.checkRuntimeVersion('0.18.0-rc.1');
 
-const _descriptor_0 = __compactRuntime.CompactTypeOpaqueString;
+const _descriptor_0 = new __compactRuntime.CompactTypeUnsignedInteger(65535n, 2);
 
 const _descriptor_1 = new __compactRuntime.CompactTypeUnsignedInteger(18446744073709551615n, 8);
 
@@ -59,8 +59,8 @@ export class Contract {
     if (typeof(witnesses_0) !== 'object') {
       throw new __compactRuntime.CompactError('first (witnesses) argument to Contract constructor is not an object');
     }
-    if (typeof(witnesses_0.secretSalaryIncrement) !== 'function') {
-      throw new __compactRuntime.CompactError('first (witnesses) argument to Contract constructor does not contain a function-valued field named secretSalaryIncrement');
+    if (typeof(witnesses_0.secretSalaryAmount) !== 'function') {
+      throw new __compactRuntime.CompactError('first (witnesses) argument to Contract constructor does not contain a function-valued field named secretSalaryAmount');
     }
     this.witnesses = witnesses_0;
     this.circuits = {
@@ -73,9 +73,16 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.callContext.currentQueryContext != undefined)) {
           __compactRuntime.typeError('increment',
                                      'argument 1 (as invoked from Typescript)',
-                                     'vansidian.compact line 34 char 1',
+                                     'vansidian.compact line 32 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
+        }
+        if (!(typeof(val_0) === 'bigint' && val_0 >= 0n && val_0 <= 65535n)) {
+          __compactRuntime.typeError('increment',
+                                     'argument 1 (argument 2 as invoked from Typescript)',
+                                     'vansidian.compact line 32 char 1',
+                                     'Uint<0..65536>',
+                                     val_0)
         }
         const context = __compactRuntime.copyCircuitContext(contextOrig_0);
         const partialProofData = {
@@ -134,8 +141,8 @@ export class Contract {
                                                  value: __compactRuntime.StateValue.newCell({ value: _descriptor_7.toValue(0n),
                                                                                               alignment: _descriptor_7.alignment() }).encode() } },
                                        { push: { storage: true,
-                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_0.toValue(''),
-                                                                                              alignment: _descriptor_0.alignment() }).encode() } },
+                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_1.toValue(0n),
+                                                                                              alignment: _descriptor_1.alignment() }).encode() } },
                                        { ins: { cached: false, n: 1 } }]);
     state_0.data = new __compactRuntime.ChargedState(context.callContext.currentQueryContext.state.state);
     return {
@@ -144,10 +151,17 @@ export class Contract {
       currentZswapLocalState: context.callContext.currentZswapLocalState
     }
   }
-  _secretSalaryIncrement_0(context, partialProofData) {
+  _secretSalaryAmount_0(context, partialProofData) {
     const witnessContext_0 = __compactRuntime.createWitnessContext(ledger(context.callContext.currentQueryContext.state), context.callContext.currentPrivateState, context.callContext.currentQueryContext.address);
-    const [nextPrivateState_0, result_0] = this.witnesses.secretSalaryIncrement(witnessContext_0);
+    const [nextPrivateState_0, result_0] = this.witnesses.secretSalaryAmount(witnessContext_0);
     context.callContext.currentPrivateState = nextPrivateState_0;
+    if (!(typeof(result_0) === 'bigint' && result_0 >= 0n && result_0 <= 65535n)) {
+      __compactRuntime.typeError('secretSalaryAmount',
+                                 'return value',
+                                 'vansidian.compact line 29 char 1',
+                                 'Uint<0..65536>',
+                                 result_0)
+    }
     partialProofData.privateTranscriptOutputs.push({
       value: _descriptor_0.toValue(result_0),
       alignment: _descriptor_0.alignment()
@@ -155,18 +169,28 @@ export class Contract {
     return result_0;
   }
   async _increment_0(context, partialProofData, val_0) {
-    const witnessVal_0 = this._secretSalaryIncrement_0(context, partialProofData);
-    const verifiedTransition_0 = val_0;
+    const secretAmount_0 = this._secretSalaryAmount_0(context, partialProofData);
+    __compactRuntime.assert(secretAmount_0 === val_0,
+                            'Witness mismatch: secret amount does not match transaction increment');
+    __compactRuntime.assert(secretAmount_0 > 0n,
+                            'Security invariant: salary increment must be strictly positive');
+    __compactRuntime.assert(secretAmount_0 <= 50000n,
+                            'Security invariant: increment exceeds maximum batch ceiling');
     __compactRuntime.queryLedgerState(context,
                                       partialProofData,
                                       [
-                                       { push: { storage: false,
-                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_7.toValue(0n),
-                                                                                              alignment: _descriptor_7.alignment() }).encode() } },
-                                       { push: { storage: true,
-                                                 value: __compactRuntime.StateValue.newCell({ value: _descriptor_0.toValue(verifiedTransition_0),
-                                                                                              alignment: _descriptor_0.alignment() }).encode() } },
-                                       { ins: { cached: false, n: 1 } }]);
+                                       { idx: { cached: false,
+                                                pushPath: true,
+                                                path: [
+                                                       { tag: 'value',
+                                                         value: { value: _descriptor_7.toValue(0n),
+                                                                  alignment: _descriptor_7.alignment() } }] } },
+                                       { addi: { immediate: parseInt(__compactRuntime.valueToBigInt(
+                                                              { value: _descriptor_0.toValue(val_0),
+                                                                alignment: _descriptor_0.alignment() }
+                                                                .value
+                                                            )) } },
+                                       { ins: { cached: true, n: 1 } }]);
     return [];
   }
 }
@@ -185,7 +209,7 @@ export function ledger(stateOrChargedState) {
   };
   return {
     get counter() {
-      return _descriptor_0.fromValue(__compactRuntime.queryLedgerState(context,
+      return _descriptor_1.fromValue(__compactRuntime.queryLedgerState(context,
                                                                        partialProofData,
                                                                        [
                                                                         { dup: { n: 0 } },
@@ -195,7 +219,7 @@ export function ledger(stateOrChargedState) {
                                                                                         { tag: 'value',
                                                                                           value: { value: _descriptor_7.toValue(0n),
                                                                                                    alignment: _descriptor_7.alignment() } }] } },
-                                                                        { popeq: { cached: false,
+                                                                        { popeq: { cached: true,
                                                                                    result: undefined } }]).value);
     }
   };
@@ -204,13 +228,13 @@ const _emptyContext = {
   callContext: { currentQueryContext: new __compactRuntime.QueryContext(new __compactRuntime.ContractState().data, __compactRuntime.dummyContractAddress()), currentGasCost: __compactRuntime.emptyRunningCost() }
 };
 const _dummyContract = new Contract({
-  secretSalaryIncrement: (...args) => undefined
+  secretSalaryAmount: (...args) => undefined
 });
 export const pureCircuits = {};
 export const contractReferenceLocations =
   { tag: 'publicLedgerArray', indices: { } };
 export const expectedVk = {
-  'increment': '099cbcb255212828871680a089e3c46873de8692d4fe399137ae311eae4328f8',
+  'increment': 'c69f5f5a5c0d74dc4bcea23e2d4d2ed7fce48d111ce8a9a755a8bdda29796735',
 };
 
 //# sourceMappingURL=index.js.map
