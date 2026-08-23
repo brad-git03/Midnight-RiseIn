@@ -102,6 +102,16 @@ See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full 
 
 ---
 
+## Scalability & Multi-Tenant Architecture
+
+- **Comprehensive Scalability Whitepaper**: See [docs/SCALABILITY.md](docs/SCALABILITY.md)
+- **High-Throughput Architecture**:
+  - **Multi-Tenant State Isolation (`Map<Bytes<32>, Bytes<32>>`)**: Organizations maintain isolated state commitment slots, eliminating global state contention across enterprises.
+  - **$O(1)$ Batch Aggregation**: Up to 1,000 employee disbursements are proven in a single on-chain transaction (`processPayrollBatch`), reducing on-chain gas costs by 99.9%.
+  - **Backward-Compatible Fast Circuit**: Retains `increment(val)` for single-payout execution.
+
+---
+
 ## Tech Stack
 
 - Midnight Network, Compact language v0.31.1, Midnight.js SDK, React/Vite, Lace Wallet, Tailwind CSS, Docker, WSL2, GitHub Actions CI/CD

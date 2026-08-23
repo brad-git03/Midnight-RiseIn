@@ -7,52 +7,72 @@
     "type": "directory",
     "contract-info.json": {
       "type": "file",
-      "size": 794,
-      "hash": "2fd7748ac38bd5a5daed7040528ba7dc936bf1c4331ce7d2449d2a7e92c2243f"
+      "size": 2584,
+      "hash": "f2e7bf5981427adae3a7ded8a2572c69f150600e00ec58ef85930d16322f1b82"
     }
   },
   "contract": {
     "type": "directory",
     "index.d.ts": {
       "type": "file",
-      "size": 1458,
-      "hash": "25719aee9679f48f6b4ccef5ccfe0d4d9ab1ec6846da44f186e38e7023fe53ff"
+      "size": 2957,
+      "hash": "e0f4b9b7d5235115e7e1a9f414fbc8a0af7c12e0a71c13c8468cc67f55e17587"
     },
     "index.js": {
       "type": "file",
-      "size": 12792,
-      "hash": "fbeb2659acb0f3bf53fff8ffdab4ce4f39d185b2d45818f5eb79a9b002faaef5"
+      "size": 40481,
+      "hash": "da8a321252265d594ea7947a0787965af88b43903508b0912f5cbb9c6696586c"
     },
     "index.js.map": {
       "type": "file",
-      "size": 628,
-      "hash": "12ed2162eb2022be146063f5ed55668b8e0ce548976baf65fabfe76f325d1572"
+      "size": 1694,
+      "hash": "33db52ec95ca227046e6bb14191d9847c4b391d7d3b4568dc629f63f32c66dc5"
     }
   },
   "zkir": {
     "type": "directory",
     "increment.bzkir": {
       "type": "file",
-      "size": 98,
-      "hash": "21815de5b7d0073a51fd3f3fe77575b49806d7e72954866a250ec49789764778"
+      "size": 100,
+      "hash": "9ce26b8ae5e381ca0a66dd410b41c1b3c0f0b3d25dc92fbc9d5c4fa281f4210f"
     },
     "increment.zkir": {
       "type": "file",
-      "size": 1292,
-      "hash": "dac4f1b7794e67e7dabcff5c9de9441886fc3366201e6cef24542e184b55e635"
+      "size": 1332,
+      "hash": "8ab65448e298581d9c0df0b03461ab4126e9a12920df8974ac23242e5bb1430a"
+    },
+    "processPayrollBatch.bzkir": {
+      "type": "file",
+      "size": 248,
+      "hash": "9347b8f35b083ff22d904e2a02ba244258507003bc92e25f2e8d8aab25e3bcc3"
+    },
+    "processPayrollBatch.zkir": {
+      "type": "file",
+      "size": 3965,
+      "hash": "f7fe210779ed172a2eb7d81cc0834f65d89ec4068000daedec204f358b2bcb1f"
     }
   },
   "keys": {
     "type": "directory",
     "increment.prover": {
       "type": "file",
-      "size": 147024,
-      "hash": "7f626a318365bc9b013ba96ad9a59d002695fe8a27da45029f52a6fb281becb8"
+      "size": 147025,
+      "hash": "c099f8dd79f905a161ac25d6046450ee1cbf9fbffc5a55ab6a073d1c064f5069"
     },
     "increment.verifier": {
       "type": "file",
       "size": 1351,
-      "hash": "c69f5f5a5c0d74dc4bcea23e2d4d2ed7fce48d111ce8a9a755a8bdda29796735"
+      "hash": "42f98145f1c779a9d9b6831c8995d8e129883524d9a44daddcf59d8723c83696"
+    },
+    "processPayrollBatch.prover": {
+      "type": "file",
+      "size": 287439,
+      "hash": "7bf7ddad259ec2830540c1320e55c15d28bfb746fa587d15f8b5357d886c006e"
+    },
+    "processPayrollBatch.verifier": {
+      "type": "file",
+      "size": 1351,
+      "hash": "7914fbca966501df0cceebfb97cb23c6b0f67d62feae9e15cb247d0e752a5a9c"
     }
   }
 }
