@@ -29,16 +29,16 @@ Vansidian solves both bottlenecks through a dual-layer architectural model:
 
 ```mermaid
 graph TD
-    subgraph Client Layer (Off-Chain Private Engine)
+    subgraph Client_Layer ["Client Layer (Off-Chain Private Engine)"]
         A["1,000 Employee Payout Records"] --> B["Merkle Tree Batch Aggregator"]
         B -->|"Calculates Batch Root & Total Amount"| C["Private Witness Engine"]
         C -->|"Generates Single ZK-SNARK Proof"| D["Client Witness Package"]
     end
 
-    subgraph Consensus Layer (Midnight Preprod)
-        D -->|"1 Transaction (O(1))"| E["processPayrollBatch Circuit"]
+    subgraph Consensus_Layer ["Consensus Layer (Midnight Preprod)"]
+        D -->|"Single Transaction - O(1)"| E["processPayrollBatch Circuit"]
         E -->|"Isolated Org Slot"| F["orgPayrollRoots[orgId] = BatchRoot"]
-        E -->|"Atomic Global Metrics"| G["totalBatchesProcessed + 1<br>totalVolumeDisbursed + batchAmount"]
+        E -->|"Atomic Global Metrics"| G["totalBatchesProcessed + 1, totalVolumeDisbursed + batchAmount"]
     end
 ```
 
