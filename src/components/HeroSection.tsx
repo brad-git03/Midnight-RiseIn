@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lock, ArrowRight, ShieldCheck, Cpu, Globe, KeyRound } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Cpu, Globe, KeyRound, Sparkles, Terminal, CheckCircle2, Lock, Zap } from 'lucide-react';
 
 interface HeroSectionProps {
   onConnectClick: () => void;
@@ -7,92 +7,158 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onConnectClick, isConnected }) => {
-  return (
-    <section id="hero" className="w-full relative pt-12 pb-16 overflow-hidden">
-      {/* Soft Glow Circles */}
-      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none"></div>
-      <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+  const handleScrollToTerminal = () => {
+    const el = document.getElementById('terminal');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
-      <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10 px-4">
-        {/* Top Badge Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-xs font-semibold text-indigo-300">
-          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-          Vansidian Zero-Knowledge & Verification Network
+  return (
+    <section id="hero" className="w-full relative pt-10 pb-20 overflow-hidden">
+      {/* Dynamic Purple/Indigo Ambient Glow Orbs */}
+      <div className="absolute top-[-15%] left-[10%] w-[550px] h-[550px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
+      <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[150px] pointer-events-none animate-pulse-glow"></div>
+      <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto text-center space-y-8 relative z-10 px-4">
+        {/* Top Innovation Badge Pill */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-gradient-to-r from-purple-500/10 via-indigo-500/15 to-purple-500/10 border border-purple-500/30 rounded-full text-xs font-semibold text-purple-300 shadow-sm backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-purple-400 animate-spin" style={{ animationDuration: '8s' }} />
+          <span>The Zero-Knowledge SaaS Engine on Midnight Network</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
         </div>
 
-        {/* Main Headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
-          Shielded State.<br />
-          <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-purple-500 bg-clip-text text-transparent">
-            Verified On-Chain Audits.
-          </span>
-        </h1>
+        {/* Catchphrase & Main SaaS Headline */}
+        <div className="space-y-4">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] max-w-4xl mx-auto">
+            Shield Every Witness.{' '}
+            <span className="bg-gradient-to-r from-purple-400 via-indigo-300 to-purple-500 bg-clip-text text-transparent drop-shadow-sm">
+              Verify Every State.
+            </span>
+          </h1>
+          <p className="text-base sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto">
+            The next-generation zero-knowledge operating system for enterprise confidential payroll, treasury disbursements, and selective audit disclosure.
+          </p>
+        </div>
 
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed max-w-2xl mx-auto">
-          Vansidian protects every transaction using client-side zero-knowledge witness circuits and selective disclosure, giving enterprises absolute data privacy with verifiable consensus on Midnight.
-        </p>
-
-        {/* Action Buttons */}
+        {/* Call to Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           {!isConnected ? (
             <button
               onClick={onConnectClick}
-              className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-sm font-bold shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-2.5 rounded-xl transition-all hover:translate-y-[-1px]"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white text-sm font-bold shadow-xl shadow-purple-600/30 flex items-center justify-center gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-98 cursor-pointer"
             >
-              <span>Connect Lace Wallet</span>
+              <span>Get Started with Lace Wallet</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           ) : (
-            <a
-              href="#dashboard"
-              className="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-sm font-bold shadow-xl shadow-emerald-600/20 flex items-center justify-center gap-2.5 rounded-xl transition-all hover:translate-y-[-1px]"
+            <button
+              onClick={handleScrollToTerminal}
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white text-sm font-bold shadow-xl shadow-emerald-600/25 flex items-center justify-center gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-98 cursor-pointer"
             >
-              <span>Launch ZK Vault Engine</span>
-              <ShieldCheck className="w-4 h-4" />
-            </a>
+              <span>Launch ZK Terminal</span>
+              <Terminal className="w-4 h-4" />
+            </button>
           )}
 
           <a
             href="#how-it-works"
-            className="px-8 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 text-sm font-semibold flex items-center justify-center gap-2.5 rounded-xl transition-all hover:translate-y-[-1px]"
+            className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800/90 text-slate-200 border border-slate-700/80 text-sm font-semibold flex items-center justify-center gap-2.5 rounded-xl transition-all duration-200 hover:border-purple-500/40 cursor-pointer"
           >
-            Explore How It Works
+            <span>Explore Architecture</span>
           </a>
         </div>
 
-        {/* Live Metric Counters (SariPay Inspired) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-slate-800/80 w-full max-w-4xl mx-auto">
+        {/* Floating Interactive ZK Badges Container */}
+        <div className="relative pt-6 pb-2 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Floating Element 1 */}
+            <div className="p-4 glass-card glass-card-hover rounded-2xl border border-purple-500/20 text-left animate-float">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-purple-500/10 border border-purple-500/30 rounded-xl text-purple-400">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xs font-bold text-white uppercase tracking-wider">Client Witness Vault</h2>
+                  <p className="text-[11px] text-slate-400">100% In-Memory Privacy</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 text-[10px] text-emerald-400 font-mono">
+                <CheckCircle2 className="w-3 h-3" />
+                <span>Zero Plaintext Over RPC</span>
+              </div>
+            </div>
+
+            {/* Floating Element 2 */}
+            <div className="p-4 glass-card glass-card-hover rounded-2xl border border-indigo-500/20 text-left animate-float-delayed">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-indigo-500/10 border border-indigo-500/30 rounded-xl text-indigo-400">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xs font-bold text-white uppercase tracking-wider">Compact v0.31.1 ZK</h2>
+                  <p className="text-[11px] text-slate-400">SNARK Prover Engine</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 text-[10px] text-indigo-300 font-mono">
+                <Cpu className="w-3 h-3" />
+                <span>Sub-Second Proof Execution</span>
+              </div>
+            </div>
+
+            {/* Floating Element 3 */}
+            <div className="p-4 glass-card glass-card-hover rounded-2xl border border-emerald-500/20 text-left animate-float-gentle">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400">
+                  <Globe className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xs font-bold text-white uppercase tracking-wider">Multi-Tenant Scale</h2>
+                  <p className="text-[11px] text-slate-400">O(1) Batch Commitments</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5 text-[10px] text-emerald-400 font-mono">
+                <ShieldCheck className="w-3 h-3" />
+                <span>Midnight Preprod Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Live Telemetry Metric Badges */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-800/80 w-full max-w-4xl mx-auto">
           <div className="p-4 glass-card rounded-xl border border-slate-800/60">
             <div className="flex items-center justify-center gap-1.5 text-purple-400 mb-1">
               <KeyRound className="w-4 h-4" />
-              <span className="text-xl font-extrabold text-white font-mono">100%</span>
+              <span className="text-2xl font-black text-white font-mono">100%</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Client Witness Privacy</p>
+            <p className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Witness Privacy</p>
           </div>
 
           <div className="p-4 glass-card rounded-xl border border-slate-800/60">
             <div className="flex items-center justify-center gap-1.5 text-indigo-400 mb-1">
               <Cpu className="w-4 h-4" />
-              <span className="text-xl font-extrabold text-white font-mono">99.9%</span>
+              <span className="text-2xl font-black text-white font-mono">O(1)</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Proof Verification</p>
+            <p className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Batch Complexity</p>
           </div>
 
           <div className="p-4 glass-card rounded-xl border border-slate-800/60">
             <div className="flex items-center justify-center gap-1.5 text-rose-400 mb-1">
               <Lock className="w-4 h-4" />
-              <span className="text-xl font-extrabold text-white font-mono">0</span>
+              <span className="text-2xl font-black text-white font-mono">0</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Plaintext Leaks</p>
+            <p className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Plaintext Leaks</p>
           </div>
 
           <div className="p-4 glass-card rounded-xl border border-slate-800/60">
             <div className="flex items-center justify-center gap-1.5 text-emerald-400 mb-1">
               <Globe className="w-4 h-4" />
-              <span className="text-xl font-extrabold text-white font-mono">Synced</span>
+              <span className="text-2xl font-black text-white font-mono">Active</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Preprod Ledger Status</p>
+            <p className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">Preprod Testnet</p>
           </div>
         </div>
       </div>

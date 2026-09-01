@@ -1,9 +1,11 @@
 import { useMidnight } from './hooks/useMidnight';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { AboutSection } from './components/AboutSection';
 import { WorkflowBar } from './components/WorkflowBar';
 import { DashboardFrame } from './components/DashboardFrame';
 import { CapabilitiesGrid } from './components/CapabilitiesGrid';
+import { DocsSection } from './components/DocsSection';
 import { PrivacyBreakdown } from './components/PrivacyBreakdown';
 import { WalletConnect } from './components/WalletConnect';
 import { Logo } from './components/Logo';
@@ -24,8 +26,8 @@ export function App() {
   const isWalletInstalled = checkWalletInstalled();
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
-      {/* Sticky Top Navbar */}
+    <div className="min-h-screen bg-[#050811] text-slate-100 flex flex-col font-sans selection:bg-purple-500/30 selection:text-purple-200">
+      {/* Sticky Modern SaaS Top Navbar */}
       <Navbar
         wallet={wallet}
         onConnect={connectWallet}
@@ -34,16 +36,19 @@ export function App() {
 
       {/* Main Page Layout Container */}
       <main className="flex-1 w-full flex flex-col items-center overflow-x-hidden">
-        {/* 1. Hero Section & Stats */}
+        {/* 1. Hero Section with Catchphrase, Dynamic Floating Elements & Live Stats */}
         <HeroSection
           onConnectClick={connectWallet}
           isConnected={wallet.isConnected}
         />
 
         {/* 2. Main Section Container */}
-        <div className="w-full max-w-6xl mx-auto px-4 space-y-10">
-          {/* Guided 4-Step Process Banner */}
-          <section id="how-it-works" className="pt-4">
+        <div className="w-full max-w-6xl mx-auto px-4 space-y-16">
+          {/* About Section */}
+          <AboutSection />
+
+          {/* Guided 4-Step Process & Lifecycle */}
+          <section id="how-it-works" className="pt-6 scroll-mt-20">
             <WorkflowBar
               isConnected={wallet.isConnected}
               hasWitnessValue={Boolean(privateWitnessValue)}
@@ -61,37 +66,45 @@ export function App() {
             />
           )}
 
-          {/* 3. Interactive Window Frame Dashboard */}
-          <DashboardFrame
-            privateWitnessValue={privateWitnessValue}
-            onWitnessChange={setPrivateWitnessValue}
-            publicCounterState={publicCounterState}
-            circuitState={circuitCall}
-            onExecute={executeCircuitCall}
-            isConnected={wallet.isConnected}
-          />
+          {/* 3. Interactive ZK Vault & Terminal Dashboard */}
+          <section id="terminal" className="scroll-mt-20">
+            <DashboardFrame
+              privateWitnessValue={privateWitnessValue}
+              onWitnessChange={setPrivateWitnessValue}
+              publicCounterState={publicCounterState}
+              circuitState={circuitCall}
+              onExecute={executeCircuitCall}
+              isConnected={wallet.isConnected}
+            />
+          </section>
 
-          {/* 4. Core Enterprise Capabilities Grid */}
-          <CapabilitiesGrid />
+          {/* 4. Enterprise Capabilities Grid */}
+          <section id="capabilities" className="scroll-mt-20">
+            <CapabilitiesGrid />
+          </section>
 
-          {/* 5. Security & Privacy Transparency Comparison */}
-          <section id="security">
+          {/* 5. Interactive Developer Documentation Section */}
+          <DocsSection />
+
+          {/* 6. Security & Privacy Transparency Comparison */}
+          <section id="security" className="scroll-mt-20">
             <PrivacyBreakdown />
           </section>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full border-t border-slate-900 bg-slate-950/80 py-10 px-6 mt-20">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <Logo size={32} showText={true} />
-          <p className="text-xs text-slate-500">
-            Vansidian • Enterprise Zero-Knowledge State & Audit Engine • Built for Midnight Builder Challenge
+      {/* Modern SaaS Footer */}
+      <footer className="w-full border-t border-slate-900 bg-slate-950/90 py-12 px-6 mt-24">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <Logo size={34} showText={true} />
+          <p className="text-xs text-slate-400">
+            Vansidian • Enterprise Zero-Knowledge State & Audit Engine • Built natively for Midnight Network
           </p>
-          <div className="flex items-center gap-4 text-xs text-slate-400">
-            <a href="#hero" className="hover:text-white transition-colors">Overview</a>
-            <a href="#dashboard" className="hover:text-white transition-colors">ZK Engine</a>
-            <a href="#security" className="hover:text-white transition-colors">Security</a>
+          <div className="flex items-center gap-5 text-xs font-semibold text-slate-400">
+            <a href="#about" className="hover:text-purple-400 transition-colors">About</a>
+            <a href="#how-it-works" className="hover:text-purple-400 transition-colors">How It Works</a>
+            <a href="#terminal" className="hover:text-purple-400 transition-colors">Terminal</a>
+            <a href="#documentation" className="hover:text-purple-400 transition-colors">Documentation</a>
           </div>
         </div>
       </footer>
