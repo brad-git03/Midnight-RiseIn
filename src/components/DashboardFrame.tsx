@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { DualStateDashboard } from './DualStateDashboard';
 import { ZKPipeline } from './ZKPipeline';
+import { PayrollRoster } from './PayrollRoster';
+import { PaystubData } from './PaystubModal';
 import { CircuitCallState } from '../hooks/useMidnight';
-import { Cpu, ShieldCheck, History, Lock, Terminal } from 'lucide-react';
+import { Cpu, ShieldCheck, History, Lock, Terminal, Users, FileText } from 'lucide-react';
 
 interface DashboardFrameProps {
   privateWitnessValue: number;
@@ -11,6 +13,7 @@ interface DashboardFrameProps {
   circuitState: CircuitCallState;
   onExecute: () => void;
   isConnected: boolean;
+  onOpenPaystub: (data: PaystubData) => void;
 }
 
 export const DashboardFrame: React.FC<DashboardFrameProps> = ({
@@ -20,12 +23,18 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
   circuitState,
   onExecute,
   isConnected,
+  onOpenPaystub,
 }) => {
-  const [activeTab, setActiveTab] = useState<'engine' | 'vault' | 'history'>('engine');
+  const [activeTab, setActiveTab] = useState<'engine' | 'roster' | 'vault' | 'history'>('engine');
+
+  const handleDisburseBatch = async (batchData: { totalAmount: number; employeeCount: number; batchRootHash: string }) => {
+    // Execute the circuit state sequence
+    await onExecute();
+  };
 
   return (
-    <section id="dashboard" className="w-full max-w-6xl mx-auto my-12 px-4">
-      {/* Outer Window Frame Container (SariPay inspired) */}
+    <section id="terminal" className="w-full max-w-6xl mx-auto my-12 px-4 scroll-mt-20">
+      {/* Outer Window Frame Container */}
       <div className="w-full bg-slate-900/90 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden relative backdrop-blur-xl">
         {/* Top Window Bar */}
         <div className="bg-slate-950/80 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
@@ -36,26 +45,26 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
           </div>
 
           <div className="text-[11px] text-slate-400 font-mono bg-slate-900 px-6 py-1 rounded-md border border-slate-800 select-none flex items-center gap-2">
-            <Lock className="w-3 h-3 text-emerald-400" />
-            <span>dashboard.vansidian.io/zk-vault</span>
+            <Lock className="w-3 h-3 text-purple-400" />
+            <span>dashboard.vansidian.io/zk-terminal</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-bold">
-              Midnight Connected
+              Midnight Preprod
             </span>
           </div>
         </div>
 
         {/* Tab Switcher Sub-Header */}
-        <div className="bg-slate-950/40 border-b border-slate-800/80 px-6 py-2.5 flex items-center justify-between">
+        <div className="bg-slate-950/40 border-b border-slate-800/80 px-4 sm:px-6 py-2.5 flex items-center justify-between overflow-x-auto">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab('engine')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
                 activeTab === 'engine'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
+                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
@@ -64,20 +73,32 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
             </button>
 
             <button
+              onClick={() => setActiveTab('roster')}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
+                activeTab === 'roster'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <Users className="w-3.5 h-3.5" />
+              <span>Enterprise Roster</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('vault')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
                 activeTab === 'vault'
-                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20'
+                  ? 'bg-slate-800 text-white shadow-md'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               <Lock className="w-3.5 h-3.5" />
-              <span>Private Witness Vault</span>
+              <span>Witness Settings</span>
             </button>
 
             <button
               onClick={() => setActiveTab('history')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
                 activeTab === 'history'
                   ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
@@ -88,15 +109,15 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
             </button>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400 font-mono">
+          <div className="hidden lg:flex items-center gap-2 text-xs text-slate-400 font-mono">
             <Terminal className="w-3.5 h-3.5 text-purple-400" />
-            <span>compact v0.31.1</span>
+            <span>Compact v0.31.1</span>
           </div>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 md:p-8 bg-slate-950/40">
-          {/* Active Tab View */}
+        <div className="p-4 sm:p-6 md:p-8 bg-slate-950/40">
+          {/* Active Tab 1: ZK Engine & Vault */}
           {activeTab === 'engine' && (
             <div className="space-y-6">
               <ZKPipeline
@@ -111,12 +132,31 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
                 circuitState={circuitState}
                 onExecute={onExecute}
                 isConnected={isConnected}
+                onOpenPaystub={onOpenPaystub}
               />
             </div>
           )}
 
+          {/* Active Tab 2: Enterprise Payroll Roster */}
+          {activeTab === 'roster' && (
+            <div className="space-y-6">
+              <ZKPipeline
+                stage={circuitState.stage}
+                isCalling={circuitState.isCalling}
+                txHash={circuitState.txHash}
+              />
+              <PayrollRoster
+                isConnected={isConnected}
+                onDisburseBatch={handleDisburseBatch}
+                isProcessing={circuitState.isCalling}
+                onOpenPaystub={onOpenPaystub}
+              />
+            </div>
+          )}
+
+          {/* Active Tab 3: Local Witness Settings */}
           {activeTab === 'vault' && (
-            <div className="glass-panel p-6 rounded-2xl border border-purple-500/30 space-y-4">
+            <div className="glass-panel p-6 rounded-2xl border border-purple-500/30 space-y-4 text-left">
               <div className="flex items-center gap-3">
                 <div className="p-3 bg-purple-500/10 rounded-xl text-purple-400">
                   <Lock className="w-6 h-6" />
@@ -142,8 +182,9 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
             </div>
           )}
 
+          {/* Active Tab 4: On-Chain History */}
           {activeTab === 'history' && (
-            <div className="glass-panel p-6 rounded-2xl border border-emerald-500/30 space-y-4">
+            <div className="glass-panel p-6 rounded-2xl border border-emerald-500/30 space-y-4 text-left">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">
@@ -166,15 +207,33 @@ export const DashboardFrame: React.FC<DashboardFrameProps> = ({
                     className="p-3.5 bg-slate-900/90 border border-slate-800 rounded-xl flex items-center justify-between text-xs"
                   >
                     <div className="flex items-center gap-3">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                       <div>
                         <p className="font-mono font-bold text-slate-200">{tx.txHash}</p>
                         <p className="text-[10px] text-slate-500">{tx.timestamp} • Verified ZK-SNARK</p>
                       </div>
                     </div>
-                    <span className="font-mono text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
-                      +{tx.addedValue} State Delta
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
+                        +{tx.addedValue} State Delta
+                      </span>
+                      <button
+                        onClick={() =>
+                          onOpenPaystub({
+                            certificateId: `CERT-${idx + 10482}`,
+                            txHash: tx.txHash,
+                            blockTimestamp: tx.timestamp,
+                            employeeName: 'Verified Recipient',
+                            disclosedAmount: tx.addedValue * 100,
+                            circuitName: 'processPayrollBatch (Compact v0.31.1)',
+                          })
+                        }
+                        className="p-1.5 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 rounded-lg cursor-pointer transition-colors"
+                        title="View Official ZK Paystub Certificate"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

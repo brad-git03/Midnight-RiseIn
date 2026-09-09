@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMidnight } from './hooks/useMidnight';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -8,6 +9,7 @@ import { CapabilitiesGrid } from './components/CapabilitiesGrid';
 import { DocsSection } from './components/DocsSection';
 import { PrivacyBreakdown } from './components/PrivacyBreakdown';
 import { WalletConnect } from './components/WalletConnect';
+import { PaystubModal, PaystubData } from './components/PaystubModal';
 import { Logo } from './components/Logo';
 
 export function App() {
@@ -23,7 +25,19 @@ export function App() {
     checkWalletInstalled,
   } = useMidnight();
 
+  const [paystubData, setPaystubData] = useState<PaystubData | null>(null);
+  const [isPaystubOpen, setIsPaystubOpen] = useState(false);
+
   const isWalletInstalled = checkWalletInstalled();
+
+  const handleOpenPaystub = (data: PaystubData) => {
+    setPaystubData(data);
+    setIsPaystubOpen(true);
+  };
+
+  const handleClosePaystub = () => {
+    setIsPaystubOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-[#050811] text-slate-100 flex flex-col font-sans selection:bg-purple-500/30 selection:text-purple-200">
@@ -66,7 +80,7 @@ export function App() {
             />
           )}
 
-          {/* 3. Interactive ZK Vault & Terminal Dashboard */}
+          {/* 3. Interactive ZK Vault & Terminal Dashboard with Roster & Paystubs */}
           <section id="terminal" className="scroll-mt-20">
             <DashboardFrame
               privateWitnessValue={privateWitnessValue}
@@ -75,6 +89,7 @@ export function App() {
               circuitState={circuitCall}
               onExecute={executeCircuitCall}
               isConnected={wallet.isConnected}
+              onOpenPaystub={handleOpenPaystub}
             />
           </section>
 
@@ -92,6 +107,13 @@ export function App() {
           </section>
         </div>
       </main>
+
+      {/* Downloadable / Printable Confidential ZK Paystub Certificate Modal */}
+      <PaystubModal
+        isOpen={isPaystubOpen}
+        onClose={handleClosePaystub}
+        data={paystubData}
+      />
 
       {/* Modern SaaS Footer */}
       <footer className="w-full border-t border-slate-900 bg-slate-950/90 py-12 px-6 mt-24">

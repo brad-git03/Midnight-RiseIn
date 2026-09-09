@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { CircuitCallState, PREPROD_CONTRACT_ADDRESS } from '../hooks/useMidnight';
-import { Lock, Eye, EyeOff, Globe, Copy, Check, ShieldAlert, Sparkles, ShieldCheck, UserCheck, Search } from 'lucide-react';
+import { Lock, Eye, EyeOff, Globe, Copy, Check, ShieldAlert, Sparkles, ShieldCheck, UserCheck, Search, FileText } from 'lucide-react';
+import { PaystubData } from './PaystubModal';
 
 interface DualStateDashboardProps {
   privateWitnessValue: number;
@@ -9,6 +9,7 @@ interface DualStateDashboardProps {
   circuitState: CircuitCallState;
   onExecute: () => void;
   isConnected: boolean;
+  onOpenPaystub?: (data: PaystubData) => void;
 }
 
 export const DualStateDashboard: React.FC<DualStateDashboardProps> = ({
@@ -18,6 +19,7 @@ export const DualStateDashboard: React.FC<DualStateDashboardProps> = ({
   circuitState,
   onExecute,
   isConnected,
+  onOpenPaystub,
 }) => {
   const [viewMode, setViewMode] = useState<'employer' | 'public'>('employer');
   const [showSecret, setShowSecret] = useState(true);
@@ -297,11 +299,29 @@ export const DualStateDashboard: React.FC<DualStateDashboardProps> = ({
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                     <span className="font-mono text-slate-300">{tx.txHash}</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <span className="text-emerald-400 font-mono font-semibold">
                       {isPublicMode ? '[ 🔒 SHIELDED ]' : `+${tx.addedValue}`}
                     </span>
                     <span className="text-[10px] text-slate-500">{tx.timestamp}</span>
+                    {onOpenPaystub && (
+                      <button
+                        onClick={() =>
+                          onOpenPaystub({
+                            certificateId: `CERT-${idx + 30192}`,
+                            txHash: tx.txHash,
+                            blockTimestamp: tx.timestamp,
+                            employeeName: 'Confidential Disbursal',
+                            disclosedAmount: tx.addedValue * 100,
+                            circuitName: 'increment (Compact v0.31.1)',
+                          })
+                        }
+                        className="p-1 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 rounded cursor-pointer transition-colors"
+                        title="View Official ZK Paystub Certificate"
+                      >
+                        <FileText className="w-3 h-3" />
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
