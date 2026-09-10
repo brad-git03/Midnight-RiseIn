@@ -57,11 +57,37 @@ Vansidian solves this by utilizing Midnight's dual-state architecture. Sensitive
 
 ---
 
+## 🚀 September 2026 Release: New Features & Roadmap
+
+This month, Vansidian has been upgraded with major enterprise usability and zero-knowledge transparency features:
+
+### ✨ Released This Month (September 2026):
+1. **🔍 Interactive "Public vs. Private Viewer Mode" Privacy Lens**:
+   - A real-time toggle switch between **Employer View** (client RAM session with unmasked figures) and **Public Explorer View** (what external block explorers and validators see).
+   - Dynamically masks confidential witness inputs to `[ 🔒 SHIELDED VIA COMPACT ZK-SNARK ]` and on-chain feed values to `[ 🔒 SHIELDED ]` with zero data leakage.
+2. **👥 Enterprise Employee Payroll Roster & Merkle Batch Generator**:
+   - Interactive team directory with dynamic base salary and performance bonus calculations.
+   - Computes a deterministic off-chain 32-byte Merkle Batch Root commitment in real time.
+   - 1-Click execution via the high-throughput `processPayrollBatch` circuit ($O(1)$ batch scaling).
+3. **🧾 Downloadable / Printable Confidential ZK Paystub & Audit Certificate**:
+   - Formal audit receipt modal featuring official Obsidian Shield branding, verified transaction hash, Merkle batch root, and Midnight Preprod block height.
+   - Includes **"Print / Save as PDF"** for corporate letterhead records and **"Copy Proof Hash"** for third-party verification.
+4. **🎨 SaaS Platform Redesign**:
+   - Modernized UI with dedicated sections (About, How It Works, Terminal, Documentation), floating ZK badge cards, and responsive navigation.
+
+### 🔮 Coming Later This Month:
+- **🏢 Multi-Tenant Workspace Switcher**: Interactive company selector allowing teams to toggle between isolated organizational state slots (`orgPayrollRoots[orgId]`) directly on the frontend.
+- **📁 Enterprise CSV Batch Uploader**: Drag-and-drop CSV payroll rosters to calculate and disburse batch commitments in a single transaction.
+
+---
+
 ## Feedback & Iterations
 
 See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full feedback logs and iteration history.
 
 ### Summary of Top Changes Made from User Feedback:
+- **Added Public vs. Private Viewer Lens**: Real-time privacy toggle proving zero plaintext data leakage (September 2026).
+- **Added Enterprise Payroll Roster & ZK Paystub Generator**: Interactive 1-click batch disbursement with printable audit certificates (September 2026).
 - **Enhanced Lace Wallet Detection**: Automatically scans all `window.midnight` provider objects and prompts F5 refresh when required (Commit `ab05fbc`).
 - **Guided 4-Step Workflow Banner**: Added step-by-step UX progress cycle for intuitive onboarding (Commit `a53bf54`).
 - **Quick Testing Presets**: Added 1-click allocation buttons (+1, +5, +10, +25) for rapid testnet state transitions (Commit `a53bf54`).
