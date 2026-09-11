@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Users, Sparkles, CheckCircle2, ShieldCheck, Lock, ArrowUpRight, Cpu, Layers, DollarSign } from 'lucide-react';
+import { Users, Sparkles, CheckCircle2, ShieldCheck, Cpu, ArrowRight } from 'lucide-react';
 import { PaystubData } from './PaystubModal';
 
 interface Employee {
@@ -82,110 +82,102 @@ export const PayrollRoster: React.FC<PayrollRosterProps> = ({
   };
 
   return (
-    <div className="glass-panel p-6 rounded-2xl border border-purple-500/30 space-y-6 text-left relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      {/* Roster Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+    <div className="w-full bg-[#070b12] rounded-2xl border border-slate-800 shadow-2xl overflow-hidden text-left">
+      {/* 1. Header Bar with Metrics */}
+      <div className="px-6 py-4 bg-[#0a0f1a] border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-purple-500/10 rounded-xl text-purple-400 border border-purple-500/30">
-            <Users className="w-6 h-6" />
+          <div className="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center text-indigo-400">
+            <Users className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
+            <h2 className="text-sm font-bold text-white flex items-center gap-2">
               Enterprise Payroll Roster
-              <span className="text-[10px] font-mono px-2 py-0.5 bg-purple-500/20 text-purple-300 rounded-md border border-purple-500/30">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-indigo-500/10 text-indigo-300 rounded-md border border-indigo-500/20 font-semibold">
                 O(1) Batch Engine
               </span>
-            </h3>
-            <p className="text-xs text-slate-400">
-              Manage team compensation with off-chain Merkle batch proof generation
+            </h2>
+            <p className="text-[11px] text-slate-400">
+              Aggregating {employeeCount} salaries into a single on-chain Merkle batch commitment
             </p>
           </div>
         </div>
 
-        {/* Live Batch Metric Badges */}
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <div className="px-3.5 py-1.5 bg-slate-900 border border-slate-800 rounded-xl text-xs">
-            <span className="text-slate-400 block text-[10px] uppercase font-mono">Team Count</span>
-            <span className="font-mono font-bold text-white">{employeeCount} Employees</span>
-          </div>
-
-          <div className="px-3.5 py-1.5 bg-slate-900 border border-emerald-500/30 rounded-xl text-xs">
-            <span className="text-slate-400 block text-[10px] uppercase font-mono">Batch Total</span>
-            <span className="font-mono font-bold text-emerald-400">
+        {/* Live Metrics */}
+        <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="text-right">
+            <span className="text-[10px] text-slate-500 block uppercase">Total Disbursal</span>
+            <span className="text-emerald-400 font-bold text-sm">
               {isPublicMode ? '[ 🔒 SHIELDED ]' : `$${totalBatchAmount.toLocaleString()}`}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Computed Merkle Root Card */}
-      <div className="p-4 bg-slate-900/90 rounded-xl border border-purple-500/25 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono">
-        <div className="space-y-1">
-          <span className="text-purple-300 font-bold flex items-center gap-1.5">
-            <Cpu className="w-3.5 h-3.5 text-purple-400" />
-            <span>Off-Chain Merkle Batch Root Commitment:</span>
-          </span>
-          <span className="text-slate-400 text-[11px] break-all block">{batchRootHash}</span>
+      {/* 2. Merkle Root Hash Strip */}
+      <div className="px-6 py-3 bg-[#050810] border-b border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono">
+        <div className="flex items-center gap-2 text-purple-300">
+          <Cpu className="w-3.5 h-3.5 text-purple-400" />
+          <span className="text-[11px] font-bold">Merkle Batch Root:</span>
+          <span className="text-slate-400 text-[11px] truncate max-w-xs sm:max-w-md">{batchRootHash}</span>
         </div>
-        <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 shrink-0">
-          Ready for Circuit Submission
+        <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+          <CheckCircle2 className="w-3 h-3" />
+          <span>Off-Chain In-Memory Hashing Ready</span>
         </span>
       </div>
 
-      {/* Interactive Employee Table */}
+      {/* 3. Streamlined Table Surface */}
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px] uppercase">
-              <th className="pb-3 pl-2">Team Member</th>
-              <th className="pb-3">Department</th>
-              <th className="pb-3">Base Salary</th>
-              <th className="pb-3">Q3 Bonus</th>
-              <th className="pb-3">Total Payout</th>
-              <th className="pb-3 pr-2 text-right">Privacy Status</th>
+            <tr className="border-b border-slate-800 bg-[#060910] text-slate-400 font-mono text-[11px] uppercase">
+              <th className="py-3 px-6">Team Member</th>
+              <th className="py-3 px-4">Department</th>
+              <th className="py-3 px-4">Base Salary</th>
+              <th className="py-3 px-4">Q3 Bonus</th>
+              <th className="py-3 px-4">Total Payout</th>
+              <th className="py-3 px-6 text-right">Privacy Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 font-sans">
+          <tbody className="divide-y divide-slate-800/70">
             {employees.map((emp) => (
               <tr key={emp.id} className="hover:bg-slate-900/40 transition-colors">
-                <td className="py-3 pl-2">
+                <td className="py-3.5 px-6">
                   <div className="font-bold text-white">{emp.name}</div>
                   <div className="text-[11px] text-slate-400">{emp.role}</div>
                 </td>
-                <td className="py-3 text-slate-300">
-                  <span className="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[11px]">
+                <td className="py-3.5 px-4 text-slate-300">
+                  <span className="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[11px] font-mono">
                     {emp.department}
                   </span>
                 </td>
-                <td className="py-3 font-mono font-semibold text-slate-200">
+                <td className="py-3.5 px-4 font-mono font-semibold text-slate-200">
                   {isPublicMode ? '[ 🔒 SHIELDED ]' : `$${emp.salary.toLocaleString()}`}
                 </td>
-                <td className="py-3 font-mono">
+                <td className="py-3.5 px-4 font-mono">
                   {isPublicMode ? (
                     <span className="text-slate-500">[ 🔒 SHIELDED ]</span>
                   ) : (
                     <button
                       onClick={() => handleBonusToggle(emp.id)}
-                      className={`px-2 py-0.5 rounded text-[11px] transition-colors cursor-pointer ${
+                      className={`px-2.5 py-0.5 rounded text-[11px] transition-colors cursor-pointer ${
                         emp.bonus > 0
-                          ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40'
+                          ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40 font-bold'
                           : 'bg-slate-800 text-slate-400 hover:text-white'
                       }`}
-                      title="Click to toggle performance bonus"
+                      title="Click to toggle bonus"
                     >
                       {emp.bonus > 0 ? `+$${emp.bonus}` : 'Add Bonus'}
                     </button>
                   )}
                 </td>
-                <td className="py-3 font-mono font-bold text-emerald-400">
+                <td className="py-3.5 px-4 font-mono font-bold text-emerald-400">
                   {isPublicMode ? '[ 🔒 SHIELDED ]' : `$${(emp.salary + emp.bonus).toLocaleString()}`}
                 </td>
-                <td className="py-3 pr-2 text-right font-mono text-[11px]">
+                <td className="py-3.5 px-6 text-right font-mono text-[11px]">
                   <span className="inline-flex items-center gap-1 text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                     <CheckCircle2 className="w-3 h-3" />
-                    <span>ZK In-Memory</span>
+                    <span>ZK Shielded</span>
                   </span>
                 </td>
               </tr>
@@ -194,23 +186,24 @@ export const PayrollRoster: React.FC<PayrollRosterProps> = ({
         </table>
       </div>
 
-      {/* Disburse Batch Call to Action */}
-      <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-xs text-slate-400">
-          <span className="text-purple-300 font-semibold">O(1) Midnight Scaling:</span> All {employeeCount} salaries are committed into 1 single on-chain transaction.
-        </div>
+      {/* 4. Action Footer Bar */}
+      <div className="px-6 py-4 bg-[#0a0f1a] border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-xs text-slate-400">
+          <strong className="text-white">Batch Proof:</strong> Proving all {employeeCount} salary splits simultaneously reduces on-chain fees by 99.9%.
+        </p>
 
         <button
           onClick={handleDisburse}
           disabled={!isConnected || isProcessing}
-          className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-xl shadow-purple-600/25 transition-all duration-200 disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2 cursor-pointer shrink-0"
+          className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white rounded-xl font-bold text-xs shadow-lg shadow-purple-600/25 transition-all duration-200 disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
         >
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-4 h-4 text-purple-200" />
           <span>
             {isProcessing
-              ? 'Proving & Submitting Batch...'
+              ? 'Computing Batch Proof...'
               : `Disburse Payroll Batch ($${totalBatchAmount.toLocaleString()})`}
           </span>
+          <ArrowRight className="w-4 h-4" />
         </button>
       </div>
     </div>
