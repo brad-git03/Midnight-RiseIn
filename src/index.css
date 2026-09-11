@@ -34,6 +34,13 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
+.glass-beveled {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.8) 0%, rgba(8, 12, 20, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 .glass-card-hover {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -45,24 +52,35 @@ body {
 }
 
 .glass-glow-purple {
-  box-shadow: 0 0 40px -5px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 0 50px -5px rgba(139, 92, 246, 0.4);
 }
 
 .glass-glow-emerald {
-  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.32);
+  box-shadow: 0 0 45px -5px rgba(16, 185, 129, 0.35);
 }
 
 .font-mono {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* Dynamic Floating Animations */
+/* Hologram Orbital Rings */
+.hologram-ring {
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.12), inset 0 0 40px rgba(139, 92, 246, 0.12);
+}
+
+.hologram-ring-dashed {
+  border: 1px dashed rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
+}
+
+/* Dynamic Floating & Orbital Animations */
 @keyframes float-slow {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-12px) rotate(1deg);
+    transform: translateY(-16px) rotate(1deg);
   }
 }
 
@@ -71,7 +89,7 @@ body {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(10px) rotate(-1deg);
+    transform: translateY(12px) rotate(-1deg);
   }
 }
 
@@ -90,8 +108,8 @@ body {
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(1.08);
+    opacity: 0.75;
+    transform: scale(1.1);
   }
 }
 
@@ -102,7 +120,25 @@ body {
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 14px #10b981);
+    filter: drop-shadow(0 0 16px #10b981);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reverse-spin-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
 
@@ -119,9 +155,17 @@ body {
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 5s ease-in-out infinite;
+  animation: pulse-glow 6s ease-in-out infinite;
 }
 
 .animate-emerald-glow {
   animation: emerald-spark 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+.animate-reverse-spin-slow {
+  animation: reverse-spin-slow 50s linear infinite;
 }
