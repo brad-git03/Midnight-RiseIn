@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { CircuitCallState, PREPROD_CONTRACT_ADDRESS } from '../hooks/useMidnight';
 import { Lock, Eye, EyeOff, Globe, Copy, Check, ShieldAlert, Sparkles, ShieldCheck, UserCheck, Search, FileText } from 'lucide-react';
 import { PaystubData } from './PaystubModal';
