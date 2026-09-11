@@ -43,3 +43,15 @@ User feedback was collected across three primary channels during the Level 5 & L
 | **Official X (Twitter) Platform Integration** | Added direct access to official `@vansidian` X profile across DApp navbar, header, and README. | ✅ Completed (`3e2dcf7`) |
 | **Level 6 Launch Users Directory** | Onboarded 20 verified Preprod testnet users in `LAUNCH_USERS.md`. | ✅ Completed |
 | **Brand Brief & Onboarding Kit** | Created `docs/BRAND_BRIEF.md` and `docs/ONBOARDING.md` for seamless user acquisition. | ✅ Completed |
+
+## September 2026 Enterprise & Reviewer Iterations
+
+| Change | User / Reviewer Feedback That Triggered It | Commit | Status |
+|--------|-------------------------------------------|--------|--------|
+| **Multi-Stage CI/CD Pipeline & Workflow Dispatch** | Reviewer noted: *"the github workflows isn't updated"*. Upgraded CI into a 2-stage verification pipeline (ZK artifact verification + formal test suite + production build + asset validation) with manual `workflow_dispatch`. | `2f9b05a` | ✅ Completed |
+| **Faceted Obsidian Brand Alignment** | User feedback requested elevating website aesthetics to align with the faceted obsidian shield logo (deep obsidian `#04060A`, neon violet/indigo `#8B5CF6`, radiant emerald `#10B981`). | `b95dc6d` | ✅ Completed |
+| **Decoupled Dedicated Transaction Workstation** | User requested separating transaction features into a dedicated dashboard/endpoint (`#app` / `#terminal`) away from marketing content. | `b95dc6d` | ✅ Completed |
+| **Floating Holographic Shield & Live ZK Sandbox** | Added grand floating 3D-styled faceted shield with dual counter-rotating orbital rings and live interactive ZK sandbox in hero section. | `e91d1bb` | ✅ Completed |
+| **Card-Free Streamlined Workstation UX** | User requested: *"lessen the use of cards or maybe have a decent design"*. Replaced 10+ nested cards with a sleek 2-column executive workstation, hairline dividers, preset witness pills, and inline ZK progression tracking. | `c7d22c3` | ✅ Completed |
+| **Runtime Reference Error Resolution** | Fixed `ReferenceError: circuitCall is not defined` and `ReferenceError: useState is not defined` across dynamic dashboard state views. | `d905f8c` | ✅ Completed |
+| **Pure Emblem Shield Logo Asset** | User requested: *"FIX THIS LOGO, IT SHOULD BE OUR UPDATED SHIELD WITH NO NAME"*. Extracted pure faceted shield without redundant text clutter into `public/logo.png`. | `8146bf9` | ✅ Completed |

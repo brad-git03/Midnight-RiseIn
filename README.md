@@ -57,23 +57,33 @@ Vansidian solves this by utilizing Midnight's dual-state architecture. Sensitive
 
 ---
 
-## 🚀 September 2026 Release: New Features & Roadmap
+## 🚀 September 2026 Release: New Features & Platform Upgrades
 
-This month, Vansidian has been upgraded with major enterprise usability and zero-knowledge transparency features:
+This month, Vansidian has been upgraded with major enterprise usability, visual redesign, and zero-knowledge transparency features:
 
 ### ✨ Released This Month (September 2026):
-1. **🔍 Interactive "Public vs. Private Viewer Mode" Privacy Lens**:
+1. **🛡️ Pure Obsidian Shield Emblem & Unified Brand Identity**:
+   - Upgraded official brand logo to a pure faceted obsidian shield with violet rim illumination and radiant emerald zero-knowledge core node.
+   - Removed redundant text inside the icon asset, ensuring crisp rendering across responsive navbars, favicons, and certificates.
+2. **⚡ Decoupled Enterprise Transaction Workstation (`#app` / `#terminal`)**:
+   - Separated the high-throughput transaction environment from the marketing landing page into a dedicated, full-screen operations console.
+   - Segmented tab navigation covering **ZK Vault Engine**, **Payroll Roster**, **Audit Ledger**, and **Contract Specs**.
+3. **💼 Card-Free Executive Workstation UX**:
+   - Completely decluttered the transaction dashboard from 10+ nested cards into a streamlined, high-efficiency 2-column workstation inspired by Stripe and Linear.
+   - Hairline dividers, quick preset witness allocation pills (`+1`, `+5`, `+25`, `+100`), and an inline real-time 4-stage ZK progression bar (`Witness` ➔ `Proof Gen` ➔ `Submission` ➔ `Confirmed`).
+4. **🪐 Grand Floating Holographic Shield Centerpiece & Live ZK Sandbox**:
+   - Hero centerpiece featuring a faceted shield with dual counter-rotating holographic orbital rings and orbiting telemetry pills.
+   - Integrated live **ZK Sandbox** in the hero section allowing evaluators and prospective users to test client-side witness proving without needing a wallet connected first.
+5. **🔍 Interactive "Public vs. Private Viewer Mode" Privacy Lens**:
    - A real-time toggle switch between **Employer View** (client RAM session with unmasked figures) and **Public Explorer View** (what external block explorers and validators see).
    - Dynamically masks confidential witness inputs to `[ 🔒 SHIELDED VIA COMPACT ZK-SNARK ]` and on-chain feed values to `[ 🔒 SHIELDED ]` with zero data leakage.
-2. **👥 Enterprise Employee Payroll Roster & Merkle Batch Generator**:
+6. **👥 Enterprise Employee Payroll Roster & Merkle Batch Generator**:
    - Interactive team directory with dynamic base salary and performance bonus calculations.
    - Computes a deterministic off-chain 32-byte Merkle Batch Root commitment in real time.
    - 1-Click execution via the high-throughput `processPayrollBatch` circuit ($O(1)$ batch scaling).
-3. **🧾 Downloadable / Printable Confidential ZK Paystub & Audit Certificate**:
+7. **🧾 Downloadable / Printable Confidential ZK Paystub & Audit Certificate**:
    - Formal audit receipt modal featuring official Obsidian Shield branding, verified transaction hash, Merkle batch root, and Midnight Preprod block height.
    - Includes **"Print / Save as PDF"** for corporate letterhead records and **"Copy Proof Hash"** for third-party verification.
-4. **🎨 SaaS Platform Redesign**:
-   - Modernized UI with dedicated sections (About, How It Works, Terminal, Documentation), floating ZK badge cards, and responsive navigation.
 
 ### 🔮 Coming Later This Month:
 - **🏢 Multi-Tenant Workspace Switcher**: Interactive company selector allowing teams to toggle between isolated organizational state slots (`orgPayrollRoots[orgId]`) directly on the frontend.
@@ -86,6 +96,10 @@ This month, Vansidian has been upgraded with major enterprise usability and zero
 See [FEEDBACK.md](FEEDBACK.md) or [docs/FEEDBACK.md](docs/FEEDBACK.md) for full feedback logs and iteration history.
 
 ### Summary of Top Changes Made from User Feedback:
+- **Updated GitHub Actions CI Workflow**: Added multi-job 2-stage verification pipeline (ZK artifact verification + formal test suite + production build + asset validation) with `workflow_dispatch` manual trigger (September 2026).
+- **Decoupled Dedicated Transaction Workstation**: Separated transactional execution (`#app`) from the public marketing site (`#home`) for distraction-free enterprise operations (September 2026).
+- **Streamlined Card-Free Dashboard Layout**: Replaced heavy nested card clutter with an executive 2-column workstation, hairline dividers, and inline ZK progression tracking (September 2026).
+- **Refined Shield Brand Emblem**: Extracted pure faceted obsidian shield without embedded text clutter for high-resolution icon fidelity (September 2026).
 - **Added Public vs. Private Viewer Lens**: Real-time privacy toggle proving zero plaintext data leakage (September 2026).
 - **Added Enterprise Payroll Roster & ZK Paystub Generator**: Interactive 1-click batch disbursement with printable audit certificates (September 2026).
 - **Enhanced Lace Wallet Detection**: Automatically scans all `window.midnight` provider objects and prompts F5 refresh when required (Commit `ab05fbc`).
@@ -184,13 +198,20 @@ npm test
 
 ---
 
-## CI/CD
+## CI/CD Pipeline
 
-Vansidian features an automated GitHub Actions CI/CD pipeline (`.github/workflows/ci.yml`). On every `push` to `main` and `pull_request`, the workflow automatically:
-1. Provisions a Node.js v22 environment.
-2. Installs project dependencies via `npm install`.
-3. Runs the unit test suite (`npm test`) covering circuit logic, ledger state transitions, and witness privacy.
-4. Validates production frontend compilation (`npm run build`).
+Vansidian features an institutional-grade, multi-stage automated GitHub Actions CI/CD pipeline (`.github/workflows/ci.yml`). On every `push` to `main`, `pull_request`, and manual invocation via `workflow_dispatch`, the workflow executes:
+
+1. **Stage 1: ZK Circuit & Security Verification (`security-and-circuit-audit`)**:
+   - Provisions a Node.js v22 LTS environment with automatic npm dependency caching.
+   - Installs frozen dependencies (`npm ci || npm install`).
+   - Verifies compiled Compact v0.31.1 ZK artifacts (`managed/vansidian/contract/index.js`, `increment.verifier`, `processPayrollBatch.verifier`).
+   - Executes the formal security & multi-tenant scalability test suite (`npm test`) — verifying **5/5 tests passing**.
+
+2. **Stage 2: Production SaaS Build & Asset Verification (`frontend-build`)**:
+   - Compiles the optimized production Vite bundle (`npm run build`).
+   - Validates critical production build outputs (`dist/index.html`, `dist/logo.png`, CSS/JS chunks).
+   - Confirms 0 compile-time errors and 0 missing brand assets.
 
 ---
 
@@ -211,7 +232,7 @@ For product vision, user demographics, Midnight privacy necessity, data modeling
 ### 1. Compact Contract Compilation
 ![Compact Compile Output](./docs/screenshots/compact-compile.png)
 
-### 2. Unit Test Suite (3/3 Passing)
+### 2. Unit Test Suite (5/5 Passing)
 ![Unit Tests Passing](./docs/screenshots/unit-tests.png)
 
 ### 3. Contract Deployment & Wallet Address Output
