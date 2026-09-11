@@ -4,20 +4,16 @@ import { ArrowRight, ShieldCheck, Cpu, Globe, KeyRound, Sparkles, Terminal, Chec
 interface HeroSectionProps {
   onConnectClick: () => void;
   isConnected: boolean;
+  onLaunchApp: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onConnectClick, isConnected }) => {
-  const handleScrollToTerminal = () => {
-    const el = document.getElementById('terminal');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
+export const HeroSection: React.FC<HeroSectionProps> = ({ onConnectClick, isConnected, onLaunchApp }) => {
   return (
-    <section id="hero" className="w-full relative pt-10 pb-20 overflow-hidden">
-      {/* Dynamic Purple/Indigo Ambient Glow Orbs */}
-      <div className="absolute top-[-15%] left-[10%] w-[550px] h-[550px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow"></div>
+    <section id="hero" className="w-full relative pt-12 pb-20 overflow-hidden">
+      {/* Dynamic Purple/Indigo Ambient Glow Orbs tailored to Faceted Logo Palette */}
+      <div className="absolute top-[-15%] left-[10%] w-[550px] h-[550px] bg-purple-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse-glow"></div>
       <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[150px] pointer-events-none animate-pulse-glow"></div>
-      <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[400px] bg-purple-900/10 rounded-full blur-[160px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[400px] bg-emerald-600/10 rounded-full blur-[160px] pointer-events-none"></div>
 
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
@@ -26,8 +22,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onConnectClick, isConn
         {/* Top Innovation Badge Pill */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-gradient-to-r from-purple-500/10 via-indigo-500/15 to-purple-500/10 border border-purple-500/30 rounded-full text-xs font-semibold text-purple-300 shadow-sm backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5 text-purple-400 animate-spin" style={{ animationDuration: '8s' }} />
-          <span>The Zero-Knowledge SaaS Engine on Midnight Network</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>The Zero-Knowledge Fintech Engine on Midnight Network</span>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-emerald-glow"></span>
         </div>
 
         {/* Catchphrase & Main SaaS Headline */}
@@ -39,33 +35,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onConnectClick, isConn
             </span>
           </h1>
           <p className="text-base sm:text-xl text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto">
-            The next-generation zero-knowledge operating system for enterprise confidential payroll, treasury disbursements, and selective audit disclosure.
+            The enterprise-grade zero-knowledge operating system for confidential payroll, treasury disbursements, and selective audit disclosure.
           </p>
         </div>
 
         {/* Call to Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          {/* Primary Action: Launch Dedicated App Dashboard */}
+          <button
+            onClick={onLaunchApp}
+            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white text-sm font-bold shadow-xl shadow-purple-600/30 flex items-center justify-center gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-98 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-purple-200" />
+            <span>Launch ZK Transaction App</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+
           {!isConnected ? (
             <button
               onClick={onConnectClick}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white text-sm font-bold shadow-xl shadow-purple-600/30 flex items-center justify-center gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-98 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-purple-500/30 text-sm font-semibold flex items-center justify-center gap-2.5 rounded-xl transition-all duration-200 hover:border-purple-400 cursor-pointer"
             >
-              <span>Get Started with Lace Wallet</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Connect Lace Wallet</span>
             </button>
           ) : (
             <button
-              onClick={handleScrollToTerminal}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white text-sm font-bold shadow-xl shadow-emerald-600/25 flex items-center justify-center gap-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-98 cursor-pointer"
+              onClick={onLaunchApp}
+              className="w-full sm:w-auto px-8 py-4 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-sm font-semibold flex items-center justify-center gap-2.5 rounded-xl transition-all duration-200 cursor-pointer"
             >
-              <span>Launch ZK Terminal</span>
-              <Terminal className="w-4 h-4" />
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Wallet Connected (Enter App)</span>
             </button>
           )}
 
           <a
             href="#how-it-works"
-            className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800/90 text-slate-200 border border-slate-700/80 text-sm font-semibold flex items-center justify-center gap-2.5 rounded-xl transition-all duration-200 hover:border-purple-500/40 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-4 bg-slate-900/60 hover:bg-slate-800/80 text-slate-400 hover:text-white border border-slate-800 text-sm font-semibold flex items-center justify-center gap-2 rounded-xl transition-all duration-200 cursor-pointer"
           >
             <span>Explore Architecture</span>
           </a>

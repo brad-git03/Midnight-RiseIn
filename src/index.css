@@ -12,25 +12,25 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #050811;
+  background-color: #04060a;
   color: #f3f4f6;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Custom Glassmorphism Utilities */
+/* Custom Glassmorphism Utilities tailored to the Faceted Logo Palette */
 .glass-panel {
-  background: rgba(11, 15, 25, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  background: rgba(8, 12, 20, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
 }
 
 .glass-card {
-  background: rgba(17, 24, 39, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 16, 26, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
@@ -40,16 +40,16 @@ body {
 
 .glass-card-hover:hover {
   transform: translateY(-4px);
-  border-color: rgba(139, 92, 246, 0.35);
-  box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.25);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(139, 92, 246, 0.28);
 }
 
 .glass-glow-purple {
-  box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 40px -5px rgba(139, 92, 246, 0.35);
 }
 
-.glass-glow-indigo {
-  box-shadow: 0 0 35px -5px rgba(99, 102, 241, 0.25);
+.glass-glow-emerald {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.32);
 }
 
 .font-mono {
@@ -86,12 +86,23 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    opacity: 0.35;
+    opacity: 0.3;
     transform: scale(1);
   }
   50% {
-    opacity: 0.75;
+    opacity: 0.7;
     transform: scale(1.08);
+  }
+}
+
+@keyframes emerald-spark {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 6px #10b981);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px #10b981);
   }
 }
 
@@ -109,4 +120,8 @@ body {
 
 .animate-pulse-glow {
   animation: pulse-glow 5s ease-in-out infinite;
+}
+
+.animate-emerald-glow {
+  animation: emerald-spark 3s ease-in-out infinite;
 }
